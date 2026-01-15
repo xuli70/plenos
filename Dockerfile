@@ -20,9 +20,9 @@ COPY informes/ /usr/share/nginx/html/informes/
 # Exponer puerto
 EXPOSE 80
 
-# Healthcheck
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-    CMD wget -q --spider http://localhost/ || exit 1
+# Healthcheck - usar 127.0.0.1 y mas tiempo de inicio
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+    CMD wget -q --spider http://127.0.0.1/ || exit 1
 
 # Comando de inicio
 CMD ["nginx", "-g", "daemon off;"]
