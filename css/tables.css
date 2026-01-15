@@ -1,0 +1,248 @@
+/* ===========================================
+   TABLES CSS - Estilos de Tablas
+   =========================================== */
+
+/* --- Wrapper de Tabla --- */
+.table-wrapper {
+    overflow-x: auto;
+    margin: var(--spacing-4) 0;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+/* --- Tabla Base --- */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    font-size: var(--font-size-sm);
+}
+
+/* --- Encabezados --- */
+.data-table thead {
+    background: var(--primary-light);
+}
+
+.data-table th {
+    padding: var(--spacing-3) var(--spacing-4);
+    text-align: left;
+    font-weight: var(--font-weight-semibold);
+    color: var(--primary-dark);
+    border-bottom: 2px solid var(--primary);
+    white-space: nowrap;
+}
+
+.data-table th.numeric {
+    text-align: right;
+}
+
+/* --- Celdas --- */
+.data-table td {
+    padding: var(--spacing-3) var(--spacing-4);
+    border-bottom: 1px solid var(--divider);
+    vertical-align: top;
+}
+
+.data-table td.numeric {
+    text-align: right;
+    font-family: var(--font-mono);
+}
+
+/* --- Filas Alternadas --- */
+.data-table tbody tr:nth-child(even) {
+    background: var(--surface-variant);
+}
+
+/* --- Hover en Filas --- */
+.data-table tbody tr:hover {
+    background: var(--primary-light);
+}
+
+/* --- Fila de Total --- */
+.data-table .total-row {
+    background: var(--primary-light) !important;
+    font-weight: var(--font-weight-semibold);
+}
+
+.data-table .total-row td {
+    border-top: 2px solid var(--primary);
+    border-bottom: none;
+}
+
+/* --- Estados en Celdas --- */
+.data-table .status-success {
+    color: var(--success);
+    font-weight: var(--font-weight-medium);
+}
+
+.data-table .status-warning {
+    color: var(--warning);
+    font-weight: var(--font-weight-medium);
+}
+
+.data-table .status-error {
+    color: var(--error);
+    font-weight: var(--font-weight-medium);
+}
+
+/* ===========================================
+   Tipos Específicos de Tablas
+   =========================================== */
+
+/* --- Tabla Financiera --- */
+.table-financiera thead {
+    background: linear-gradient(135deg, var(--section-contratos-bg) 0%, var(--surface) 100%);
+}
+
+.table-financiera th {
+    color: var(--section-contratos);
+    border-bottom-color: var(--section-contratos);
+}
+
+/* --- Tabla de Votaciones --- */
+.table-votaciones thead {
+    background: linear-gradient(135deg, var(--section-votaciones-bg) 0%, var(--surface) 100%);
+}
+
+.table-votaciones th {
+    color: var(--section-votaciones);
+    border-bottom-color: var(--section-votaciones);
+}
+
+/* --- Tabla de Indicadores --- */
+.table-indicadores thead {
+    background: linear-gradient(135deg, var(--section-hallazgos-bg) 0%, var(--surface) 100%);
+}
+
+.table-indicadores th {
+    color: var(--section-hallazgos);
+    border-bottom-color: var(--section-hallazgos);
+}
+
+/* --- Tabla de Alertas --- */
+.table-alertas thead {
+    background: linear-gradient(135deg, var(--section-alertas-bg) 0%, var(--surface) 100%);
+}
+
+.table-alertas th {
+    color: var(--section-alertas);
+    border-bottom-color: var(--section-alertas);
+}
+
+/* ===========================================
+   Tablas Compactas (para móvil)
+   =========================================== */
+
+@media (max-width: 768px) {
+    .data-table {
+        font-size: var(--font-size-xs);
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: var(--spacing-2) var(--spacing-3);
+    }
+
+    /* Ocultar columnas menos importantes en móvil */
+    .data-table .hide-mobile {
+        display: none;
+    }
+}
+
+/* ===========================================
+   Tabla Responsive (Cards en móvil)
+   =========================================== */
+
+@media (max-width: 640px) {
+    .table-wrapper.responsive-cards {
+        box-shadow: none;
+    }
+
+    .table-wrapper.responsive-cards .data-table {
+        display: block;
+    }
+
+    .table-wrapper.responsive-cards .data-table thead {
+        display: none;
+    }
+
+    .table-wrapper.responsive-cards .data-table tbody {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-3);
+    }
+
+    .table-wrapper.responsive-cards .data-table tr {
+        display: block;
+        background: var(--surface);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-sm);
+        padding: var(--spacing-3);
+    }
+
+    .table-wrapper.responsive-cards .data-table td {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--spacing-2) 0;
+        border-bottom: 1px solid var(--divider);
+    }
+
+    .table-wrapper.responsive-cards .data-table td:last-child {
+        border-bottom: none;
+    }
+
+    .table-wrapper.responsive-cards .data-table td::before {
+        content: attr(data-label);
+        font-weight: var(--font-weight-medium);
+        color: var(--text-secondary);
+        margin-right: var(--spacing-3);
+    }
+}
+
+/* ===========================================
+   Estilos para Tablas de Datos del Pleno
+   =========================================== */
+
+/* Tabla de Datos de Sesión */
+.pleno-section[data-section="datos"] .data-table {
+    margin-top: var(--spacing-3);
+}
+
+.pleno-section[data-section="datos"] .data-table thead {
+    background: var(--section-datos-bg);
+}
+
+.pleno-section[data-section="datos"] .data-table th {
+    color: var(--section-datos);
+    border-bottom-color: var(--section-datos);
+}
+
+/* Tabla de Contratos */
+.pleno-section[data-section="contratos"] .data-table thead {
+    background: var(--section-contratos-bg);
+}
+
+.pleno-section[data-section="contratos"] .data-table th {
+    color: var(--section-contratos);
+    border-bottom-color: var(--section-contratos);
+}
+
+/* Tabla de Subvenciones */
+.pleno-section[data-section="subvenciones"] .data-table thead {
+    background: var(--section-subvenciones-bg);
+}
+
+.pleno-section[data-section="subvenciones"] .data-table th {
+    color: var(--section-subvenciones);
+    border-bottom-color: var(--section-subvenciones);
+}
+
+/* Tabla de RRHH */
+.pleno-section[data-section="rrhh"] .data-table thead {
+    background: var(--section-rrhh-bg);
+}
+
+.pleno-section[data-section="rrhh"] .data-table th {
+    color: var(--section-rrhh);
+    border-bottom-color: var(--section-rrhh);
+}

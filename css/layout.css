@@ -1,0 +1,205 @@
+/* ===========================================
+   LAYOUT CSS - Header, Footer, Estructura
+   =========================================== */
+
+/* --- Header Principal --- */
+.header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    padding: var(--spacing-6) var(--spacing-4);
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+    box-shadow: var(--shadow-md);
+}
+
+.header-content {
+    max-width: var(--max-width-xl);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--spacing-4);
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+}
+
+.header-logo {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-2xl);
+}
+
+.header-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin: 0;
+}
+
+.header-subtitle {
+    font-size: var(--font-size-sm);
+    opacity: 0.9;
+    margin: 0;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+}
+
+.header-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: var(--spacing-2) var(--spacing-3);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+}
+
+.header-badge.success {
+    background: var(--success);
+}
+
+/* --- Main Content --- */
+.main {
+    min-height: calc(100vh - 200px);
+    padding: var(--spacing-6) var(--spacing-4);
+}
+
+.main-content {
+    max-width: var(--max-width-xl);
+    margin: 0 auto;
+}
+
+/* --- Footer --- */
+.footer {
+    background: var(--surface);
+    border-top: 1px solid var(--divider);
+    padding: var(--spacing-6) var(--spacing-4);
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: var(--max-width-xl);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--spacing-4);
+}
+
+.footer-text {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    margin: 0;
+}
+
+.footer-links {
+    display: flex;
+    gap: var(--spacing-4);
+}
+
+.footer-link {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    transition: color var(--transition-fast);
+}
+
+.footer-link:hover {
+    color: var(--primary);
+}
+
+/* --- Page Layout --- */
+.page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- Section --- */
+.section {
+    margin-bottom: var(--spacing-8);
+}
+
+.section-header {
+    margin-bottom: var(--spacing-4);
+}
+
+.section-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.section-title-icon {
+    font-size: var(--font-size-2xl);
+}
+
+/* --- Responsive Layout --- */
+@media (max-width: 768px) {
+    .header {
+        padding: var(--spacing-4);
+    }
+
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .header-brand {
+        flex-direction: column;
+    }
+
+    .header-title {
+        font-size: var(--font-size-lg);
+    }
+
+    .main {
+        padding: var(--spacing-4);
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* --- Sidebar Layout (futuro) --- */
+.layout-with-sidebar {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: var(--spacing-6);
+}
+
+.sidebar {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-4);
+    height: fit-content;
+    position: sticky;
+    top: calc(80px + var(--spacing-4));
+}
+
+@media (max-width: 1024px) {
+    .layout-with-sidebar {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: static;
+    }
+}

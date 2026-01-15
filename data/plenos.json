@@ -1,0 +1,94 @@
+{
+  "generatedAt": "2025-01-15T00:00:00.000Z",
+  "totalPlenos": 8,
+  "plenos": [
+    {
+      "id": "2025-11-24",
+      "filename": "INFORME_ECO_2025-11-24.md",
+      "fecha": "2025-11-24",
+      "fechaFormateada": "24 de noviembre de 2025",
+      "fechaCorta": "24/11/2025",
+      "titulo": "Pleno 24 de noviembre de 2025",
+      "tipo": "Sesión Extraordinaria",
+      "duracion": "",
+      "asistencia": ""
+    },
+    {
+      "id": "2025-07-28",
+      "filename": "INFORME_ECO_2025-07-28.md",
+      "fecha": "2025-07-28",
+      "fechaFormateada": "28 de julio de 2025",
+      "fechaCorta": "28/07/2025",
+      "titulo": "Pleno 28 de julio de 2025",
+      "tipo": "Sesión Ordinaria",
+      "duracion": "",
+      "asistencia": ""
+    },
+    {
+      "id": "2025-06-26",
+      "filename": "INFORME_ECO_2025-06-26.md",
+      "fecha": "2025-06-26",
+      "fechaFormateada": "26 de junio de 2025",
+      "fechaCorta": "26/06/2025",
+      "titulo": "Pleno 26 de junio de 2025",
+      "tipo": "Sesión Extraordinaria-Urgente",
+      "duracion": "",
+      "asistencia": ""
+    },
+    {
+      "id": "2025-05-16",
+      "filename": "INFORME_ECO_2025-05-16.md",
+      "fecha": "2025-05-16",
+      "fechaFormateada": "16 de mayo de 2025",
+      "fechaCorta": "16/05/2025",
+      "titulo": "Pleno 16 de mayo de 2025",
+      "tipo": "Sesión Ordinaria",
+      "duracion": "",
+      "asistencia": ""
+    },
+    {
+      "id": "2025-04-25",
+      "filename": "INFORME_ECO_2025-04-25.md",
+      "fecha": "2025-04-25",
+      "fechaFormateada": "25 de abril de 2025",
+      "fechaCorta": "25/04/2025",
+      "titulo": "Pleno 25 de abril de 2025",
+      "tipo": "Sesión Ordinaria",
+      "duracion": "",
+      "asistencia": ""
+    },
+    {
+      "id": "2025-02-05",
+      "filename": "INFORME_ECO_2025-02-05.md",
+      "fecha": "2025-02-05",
+      "fechaFormateada": "5 de febrero de 2025",
+      "fechaCorta": "05/02/2025",
+      "titulo": "Pleno 5 de febrero de 2025",
+      "tipo": "Sesión Ordinaria",
+      "duracion": "",
+      "asistencia": ""
+    },
+    {
+      "id": "2025-01-13",
+      "filename": "INFORME_ECO_2025-01-13.md",
+      "fecha": "2025-01-13",
+      "fechaFormateada": "13 de enero de 2025",
+      "fechaCorta": "13/01/2025",
+      "titulo": "Pleno 13 de enero de 2025",
+      "tipo": "Sesión Ordinaria con Urgencia aprobada",
+      "duracion": "14:05 - 14:40 (35 minutos)",
+      "asistencia": "11/11 (100%)"
+    },
+    {
+      "id": "2024-12-26",
+      "filename": "INFORME_ECO_2024-12-26.md",
+      "fecha": "2024-12-26",
+      "fechaFormateada": "26 de diciembre de 2024",
+      "fechaCorta": "26/12/2024",
+      "titulo": "Pleno 26 de diciembre de 2024",
+      "tipo": "Sesión Ordinaria",
+      "duracion": "",
+      "asistencia": ""
+    }
+  ]
+}

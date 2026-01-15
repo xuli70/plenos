@@ -1,0 +1,144 @@
+/* ===========================================
+   VARIABLES CSS - Plenos La Zarza
+   =========================================== */
+
+:root {
+    /* --- Colores Principales --- */
+    --primary: #1565C0;
+    --primary-dark: #0D47A1;
+    --primary-light: #E3F2FD;
+
+    /* --- Colores por Sección --- */
+    --section-datos: #1976D2;
+    --section-datos-bg: #E3F2FD;
+
+    --section-resumen: #7B1FA2;
+    --section-resumen-bg: #F3E5F5;
+
+    --section-hallazgos: #388E3C;
+    --section-hallazgos-bg: #E8F5E9;
+
+    --section-contratos: #F57C00;
+    --section-contratos-bg: #FFF3E0;
+
+    --section-subvenciones: #00ACC1;
+    --section-subvenciones-bg: #E0F7FA;
+
+    --section-alertas: #D32F2F;
+    --section-alertas-bg: #FFEBEE;
+
+    --section-votaciones: #689F38;
+    --section-votaciones-bg: #F1F8E9;
+
+    --section-seguimiento: #FBC02D;
+    --section-seguimiento-bg: #FFFDE7;
+
+    --section-patrimonio: #5D4037;
+    --section-patrimonio-bg: #EFEBE9;
+
+    --section-rrhh: #7986CB;
+    --section-rrhh-bg: #E8EAF6;
+
+    /* --- Colores de Estado --- */
+    --success: #2E7D32;
+    --success-bg: #E8F5E9;
+    --success-light: #C8E6C9;
+
+    --warning: #E65100;
+    --warning-bg: #FFF3E0;
+    --warning-light: #FFE0B2;
+
+    --error: #C62828;
+    --error-bg: #FFEBEE;
+    --error-light: #FFCDD2;
+
+    --info: #0277BD;
+    --info-bg: #E1F5FE;
+    --info-light: #B3E5FC;
+
+    /* --- Colores Neutros --- */
+    --background: #FAFAFA;
+    --surface: #FFFFFF;
+    --surface-variant: #F5F5F5;
+    --text-primary: #212121;
+    --text-secondary: #616161;
+    --text-disabled: #9E9E9E;
+    --divider: #E0E0E0;
+    --border: #BDBDBD;
+
+    /* --- Tipografía --- */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+    --font-size-xs: 0.75rem;    /* 12px */
+    --font-size-sm: 0.875rem;   /* 14px */
+    --font-size-base: 1rem;     /* 16px */
+    --font-size-lg: 1.125rem;   /* 18px */
+    --font-size-xl: 1.25rem;    /* 20px */
+    --font-size-2xl: 1.5rem;    /* 24px */
+    --font-size-3xl: 1.875rem;  /* 30px */
+
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    --line-height-tight: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
+
+    /* --- Espaciado --- */
+    --spacing-1: 0.25rem;   /* 4px */
+    --spacing-2: 0.5rem;    /* 8px */
+    --spacing-3: 0.75rem;   /* 12px */
+    --spacing-4: 1rem;      /* 16px */
+    --spacing-5: 1.25rem;   /* 20px */
+    --spacing-6: 1.5rem;    /* 24px */
+    --spacing-8: 2rem;      /* 32px */
+    --spacing-10: 2.5rem;   /* 40px */
+    --spacing-12: 3rem;     /* 48px */
+
+    /* --- Bordes y Sombras --- */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-full: 9999px;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+
+    /* --- Transiciones --- */
+    --transition-fast: 150ms ease;
+    --transition-normal: 250ms ease;
+    --transition-slow: 350ms ease;
+
+    /* --- Z-Index --- */
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-fixed: 300;
+    --z-modal: 400;
+    --z-tooltip: 500;
+
+    /* --- Anchos Máximos --- */
+    --max-width-sm: 640px;
+    --max-width-md: 768px;
+    --max-width-lg: 1024px;
+    --max-width-xl: 1280px;
+    --max-width-content: 900px;
+}
+
+/* Tema oscuro (preparado para futuro) */
+@media (prefers-color-scheme: dark) {
+    :root.auto-dark {
+        --background: #121212;
+        --surface: #1E1E1E;
+        --surface-variant: #2D2D2D;
+        --text-primary: #FFFFFF;
+        --text-secondary: #B0B0B0;
+        --divider: #404040;
+        --border: #505050;
+    }
+}

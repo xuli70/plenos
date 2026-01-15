@@ -1,0 +1,248 @@
+/* ===========================================
+   PLENO CSS - Estilos del Contenido de Plenos
+   =========================================== */
+
+/* --- Título Principal del Pleno --- */
+.pleno-main-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-6);
+    padding-bottom: var(--spacing-4);
+    border-bottom: 2px solid var(--primary);
+}
+
+/* --- Secciones del Pleno --- */
+.pleno-section {
+    margin-bottom: var(--spacing-8);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+}
+
+.pleno-section .section-header {
+    padding: var(--spacing-4) var(--spacing-5);
+    border-left: 4px solid var(--primary);
+}
+
+.pleno-section .section-title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.pleno-section .section-icon {
+    font-size: 24px;
+}
+
+.pleno-section .section-content {
+    padding: var(--spacing-5);
+}
+
+/* --- Colores por Tipo de Sección --- */
+.pleno-section[data-section="datos"] .section-header {
+    background: var(--section-datos-bg);
+    border-left-color: var(--section-datos);
+}
+
+.pleno-section[data-section="resumen"] .section-header {
+    background: var(--section-resumen-bg);
+    border-left-color: var(--section-resumen);
+}
+
+.pleno-section[data-section="hallazgos"] .section-header {
+    background: var(--section-hallazgos-bg);
+    border-left-color: var(--section-hallazgos);
+}
+
+.pleno-section[data-section="modificaciones"] .section-header {
+    background: var(--section-contratos-bg);
+    border-left-color: var(--section-contratos);
+}
+
+.pleno-section[data-section="contratos"] .section-header {
+    background: var(--section-contratos-bg);
+    border-left-color: var(--section-contratos);
+}
+
+.pleno-section[data-section="subvenciones"] .section-header {
+    background: var(--section-subvenciones-bg);
+    border-left-color: var(--section-subvenciones);
+}
+
+.pleno-section[data-section="indicadores"] .section-header {
+    background: var(--section-hallazgos-bg);
+    border-left-color: var(--section-hallazgos);
+}
+
+.pleno-section[data-section="alertas"] .section-header {
+    background: var(--section-alertas-bg);
+    border-left-color: var(--section-alertas);
+}
+
+.pleno-section[data-section="votaciones"] .section-header {
+    background: var(--section-votaciones-bg);
+    border-left-color: var(--section-votaciones);
+}
+
+.pleno-section[data-section="rrhh"] .section-header {
+    background: var(--section-rrhh-bg);
+    border-left-color: var(--section-rrhh);
+}
+
+.pleno-section[data-section="patrimonio"] .section-header {
+    background: var(--section-patrimonio-bg);
+    border-left-color: var(--section-patrimonio);
+}
+
+.pleno-section[data-section="compromisos"] .section-header,
+.pleno-section[data-section="seguimiento"] .section-header {
+    background: var(--section-seguimiento-bg);
+    border-left-color: var(--section-seguimiento);
+}
+
+.pleno-section[data-section="notas"] .section-header,
+.pleno-section[data-section="glosario"] .section-header {
+    background: var(--section-datos-bg);
+    border-left-color: var(--section-datos);
+}
+
+/* --- Subsecciones --- */
+.subsection-title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin: var(--spacing-6) 0 var(--spacing-3) 0;
+    padding-bottom: var(--spacing-2);
+    border-bottom: 1px solid var(--divider);
+}
+
+.subsubsection-title {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-secondary);
+    margin: var(--spacing-4) 0 var(--spacing-2) 0;
+}
+
+/* --- Párrafos dentro de Pleno --- */
+.pleno-content p {
+    margin-bottom: var(--spacing-3);
+    line-height: var(--line-height-relaxed);
+}
+
+.pleno-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* --- Listas dentro del Pleno --- */
+.pleno-content ul {
+    margin: var(--spacing-3) 0;
+    padding-left: var(--spacing-6);
+}
+
+.pleno-content ul li {
+    margin-bottom: var(--spacing-2);
+    line-height: var(--line-height-normal);
+}
+
+/* --- Separadores --- */
+.pleno-content hr {
+    border: none;
+    border-top: 1px solid var(--divider);
+    margin: var(--spacing-6) 0;
+}
+
+/* --- Código Inline --- */
+.pleno-content code {
+    background: var(--surface-variant);
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+}
+
+/* --- Strong/Bold --- */
+.pleno-content strong {
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+/* --- Emphasis/Italic --- */
+.pleno-content em {
+    font-style: italic;
+    color: var(--text-secondary);
+}
+
+/* --- Info Lists en Secciones --- */
+.pleno-section .info-list {
+    background: var(--surface-variant);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-3);
+}
+
+.pleno-section .info-list li {
+    padding: var(--spacing-2) var(--spacing-3);
+}
+
+/* --- Estados en Celdas --- */
+.status-success {
+    color: var(--success) !important;
+    font-weight: var(--font-weight-medium);
+}
+
+.status-warning {
+    color: var(--warning) !important;
+    font-weight: var(--font-weight-medium);
+}
+
+.status-error {
+    color: var(--error) !important;
+    font-weight: var(--font-weight-medium);
+}
+
+/* --- Animación de Entrada --- */
+/* Animación deshabilitada - causaba problemas de visibilidad en tabs */
+/*
+.pleno-section {
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+*/
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .pleno-main-title {
+        font-size: var(--font-size-xl);
+    }
+
+    .pleno-section .section-header {
+        padding: var(--spacing-3) var(--spacing-4);
+    }
+
+    .pleno-section .section-title {
+        font-size: var(--font-size-base);
+    }
+
+    .pleno-section .section-icon {
+        font-size: 20px;
+    }
+
+    .pleno-section .section-content {
+        padding: var(--spacing-4);
+    }
+}

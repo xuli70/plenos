@@ -1,0 +1,21 @@
+{
+  "name": "plenos-lazarza",
+  "version": "1.0.0",
+  "description": "Web de visualización de plenos municipales - Ayuntamiento de La Zarza",
+  "private": true,
+  "scripts": {
+    "build": "node build/generate-index.js",
+    "serve": "npx serve .",
+    "docker:build": "docker build -t plenos-lazarza .",
+    "docker:run": "docker run -p 8080:80 plenos-lazarza"
+  },
+  "keywords": [
+    "plenos",
+    "ayuntamiento",
+    "la-zarza",
+    "auditoria",
+    "municipal"
+  ],
+  "author": "Ayuntamiento de La Zarza",
+  "license": "UNLICENSED"
+}

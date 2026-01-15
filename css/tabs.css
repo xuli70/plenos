@@ -1,0 +1,292 @@
+/* ===========================================
+   TABS CSS - Sistema de Navegación por Tabs
+   =========================================== */
+
+/* --- Contenedor Principal --- */
+.tabs-container {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+/* --- Header de Tabs --- */
+.tabs-header {
+    display: flex;
+    overflow-x: auto;
+    background: var(--surface-variant);
+    border-bottom: 1px solid var(--divider);
+    padding: var(--spacing-2);
+    gap: var(--spacing-2);
+    scrollbar-width: thin;
+}
+
+.tabs-header::-webkit-scrollbar {
+    height: 4px;
+}
+
+.tabs-header::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: var(--radius-full);
+}
+
+/* --- Botón de Tab --- */
+.tab-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-1);
+    padding: var(--spacing-3) var(--spacing-4);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+    min-width: 80px;
+}
+
+.tab-btn:hover {
+    background: var(--divider);
+}
+
+.tab-btn.active {
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+}
+
+/* --- Badge del Tab --- */
+.tab-badge {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    padding: var(--spacing-1) var(--spacing-2);
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tab-badge.ordinario {
+    background: var(--info-bg);
+    color: var(--info);
+}
+
+.tab-badge.extraordinario {
+    background: var(--warning-bg);
+    color: var(--warning);
+}
+
+.tab-badge.urgente {
+    background: var(--error-bg);
+    color: var(--error);
+}
+
+/* --- Fecha del Tab --- */
+.tab-fecha {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
+}
+
+.tab-btn.active .tab-fecha {
+    color: var(--text-primary);
+}
+
+/* --- Panel de Tab --- */
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+/* --- Header del Pleno --- */
+.pleno-header {
+    padding: var(--spacing-6);
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--surface) 100%);
+    border-bottom: 1px solid var(--divider);
+}
+
+.pleno-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacing-3);
+}
+
+.pleno-badge {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    padding: var(--spacing-2) var(--spacing-3);
+    border-radius: var(--radius-full);
+}
+
+.pleno-badge.ordinario {
+    background: var(--info);
+    color: white;
+}
+
+.pleno-badge.extraordinario {
+    background: var(--warning);
+    color: white;
+}
+
+.pleno-badge.urgente {
+    background: var(--error);
+    color: white;
+}
+
+.pleno-fecha {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary);
+}
+
+.pleno-duracion {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.pleno-duracion .material-icons-round {
+    font-size: 16px;
+}
+
+/* --- Contenido del Pleno --- */
+.pleno-content {
+    padding: var(--spacing-6);
+}
+
+/* --- Sección de Disqus --- */
+.disqus-section {
+    margin-top: var(--spacing-8);
+    padding: var(--spacing-6);
+    background: var(--surface-variant);
+    border-top: 1px solid var(--divider);
+}
+
+.disqus-header {
+    margin-bottom: var(--spacing-4);
+}
+
+.disqus-title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-2);
+}
+
+.disqus-title .material-icons-round {
+    color: var(--primary);
+}
+
+.disqus-notice {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.disqus-container {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-4);
+}
+
+.disqus-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-8);
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.disqus-error .material-icons-round {
+    font-size: 48px;
+    color: var(--error);
+}
+
+/* --- Estados de Carga y Error --- */
+.loading-container,
+.error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-12);
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.loading-spinner {
+    width: 48px;
+    height: 48px;
+    color: var(--primary);
+    margin-bottom: var(--spacing-4);
+}
+
+.loading-spinner svg {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.error-container {
+    gap: var(--spacing-4);
+}
+
+.error-icon {
+    font-size: 64px;
+    color: var(--error);
+}
+
+.error-container h2 {
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.error-container p {
+    margin: 0;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .tabs-header {
+        padding: var(--spacing-1);
+    }
+
+    .tab-btn {
+        padding: var(--spacing-2) var(--spacing-3);
+        min-width: 60px;
+    }
+
+    .tab-badge {
+        font-size: 10px;
+        padding: 2px 6px;
+    }
+
+    .tab-fecha {
+        font-size: var(--font-size-xs);
+    }
+
+    .pleno-header {
+        padding: var(--spacing-4);
+    }
+
+    .pleno-content {
+        padding: var(--spacing-4);
+    }
+
+    .disqus-section {
+        padding: var(--spacing-4);
+    }
+}
