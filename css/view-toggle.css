@@ -175,6 +175,102 @@
     color: var(--primary-dark);
 }
 
+/* ===========================================
+   PDF Viewer Styles
+   =========================================== */
+.pdf-viewer-container {
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    min-height: 500px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--surface);
+}
+
+.pdf-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    background: var(--primary);
+    color: white;
+    flex-shrink: 0;
+}
+
+.pdf-toolbar-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.pdf-toolbar-title .material-icons-round {
+    font-size: 22px;
+}
+
+.pdf-toolbar-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.pdf-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.pdf-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.pdf-btn .material-icons-round {
+    font-size: 18px;
+}
+
+.pdf-iframe {
+    flex: 1;
+    width: 100%;
+    border: none;
+    background: #f5f5f5;
+}
+
+/* PDF Error State */
+.pdf-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.pdf-error .material-icons-round {
+    font-size: 64px;
+    color: var(--warning);
+    margin-bottom: 16px;
+}
+
+.pdf-error p {
+    font-size: 16px;
+    max-width: 300px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .view-toggle-container {
@@ -205,6 +301,36 @@
 
     .md-content th, .md-content td {
         padding: 8px;
+    }
+
+    /* PDF Viewer Responsive */
+    .pdf-viewer-container {
+        height: 60vh;
+        min-height: 400px;
+    }
+
+    .pdf-toolbar {
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .pdf-toolbar-title {
+        font-size: 14px;
+    }
+
+    .pdf-toolbar-actions {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .pdf-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .pdf-btn-text {
+        display: none;
     }
 }
 

@@ -82,9 +82,9 @@ const TabsManager = {
                     </div>
                 </div>
 
-                <!-- Vista Informe (Markdown) -->
+                <!-- Vista Informe (PDF del Acta Original) -->
                 <div class="tab-view tab-view-informe">
-                    <div class="md-content"></div>
+                    <div class="pdf-viewer-container"></div>
                 </div>
 
                 ${this.renderDisqusSection(pleno)}

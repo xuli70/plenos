@@ -1,6 +1,6 @@
 /* ===========================================
    VIEW-TOGGLE.JS - Controlador Vista Toggle
-   Alterna entre Vista Dashboard y Vista Informe
+   Alterna entre Vista Dashboard y Vista Informe (PDF)
    =========================================== */
 
 const ViewToggleController = {
@@ -55,7 +55,7 @@ const ViewToggleController = {
     },
 
     /**
-     * Renderiza el contenido Markdown del informe
+     * Renderiza el visor de PDF del acta original
      */
     _renderInforme(tabPanel) {
         const tabId = tabPanel.id.replace('panel-', '');
@@ -63,20 +63,63 @@ const ViewToggleController = {
 
         // Buscar el pleno en DataLoader
         const pleno = DataLoader.plenos.find(p => p.id === tabId);
-        if (!pleno || !pleno.content) {
-            console.warn(`No se encontro markdown para pleno: ${tabId}`);
+        if (!pleno || !pleno.pdfFile) {
+            console.warn(`No se encontro PDF para pleno: ${tabId}`);
+            this._renderPdfError(tabPanel, 'No se encontro el archivo PDF para este pleno.');
             return;
         }
 
-        const container = tabPanel.querySelector('.md-content');
+        const container = tabPanel.querySelector('.pdf-viewer-container');
         if (!container) {
-            console.warn(`No se encontro contenedor .md-content para pleno: ${tabId}`);
+            console.warn(`No se encontro contenedor .pdf-viewer-container para pleno: ${tabId}`);
             return;
         }
 
-        // Renderizar markdown
-        container.innerHTML = MarkdownParser.parse(pleno.content);
+        // Construir URL del PDF
+        const pdfUrl = `${CONFIG.paths.pdfActas}${pleno.pdfFile}`;
+
+        // Crear visor de PDF con barra de herramientas
+        container.innerHTML = `
+            <div class="pdf-toolbar">
+                <div class="pdf-toolbar-title">
+                    <span class="material-icons-round">picture_as_pdf</span>
+                    <span>Acta Original del Pleno</span>
+                </div>
+                <div class="pdf-toolbar-actions">
+                    <a href="${pdfUrl}" target="_blank" class="pdf-btn pdf-btn-open">
+                        <span class="material-icons-round">open_in_new</span>
+                        <span class="pdf-btn-text">Abrir en nueva pestaña</span>
+                    </a>
+                    <a href="${pdfUrl}" download="${pleno.pdfFile}" class="pdf-btn pdf-btn-download">
+                        <span class="material-icons-round">download</span>
+                        <span class="pdf-btn-text">Descargar PDF</span>
+                    </a>
+                </div>
+            </div>
+            <iframe
+                src="${pdfUrl}"
+                class="pdf-iframe"
+                title="Acta del Pleno ${pleno.fechaFormateada}"
+                loading="lazy"
+            ></iframe>
+        `;
+
         this._renderedTabs.add(tabId);
+    },
+
+    /**
+     * Muestra un mensaje de error cuando no se encuentra el PDF
+     */
+    _renderPdfError(tabPanel, message) {
+        const container = tabPanel.querySelector('.pdf-viewer-container');
+        if (!container) return;
+
+        container.innerHTML = `
+            <div class="pdf-error">
+                <span class="material-icons-round">error_outline</span>
+                <p>${message}</p>
+            </div>
+        `;
     },
 
     /**
