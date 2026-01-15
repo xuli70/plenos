@@ -35,6 +35,9 @@ const App = {
             // Inicializar sistema de tabs
             TabsManager.init(plenos);
 
+            // Inicializar Vista Toggle
+            ViewToggleController.init();
+
             // Mostrar contenido
             this.showContent();
 

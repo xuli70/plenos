@@ -46,7 +46,7 @@ const TabsManager = {
             </button>
         `).join('');
 
-        // Generar paneles de contenido
+        // Generar paneles de contenido con Vista Toggle
         this.container.innerHTML = this.plenos.map((pleno, index) => `
             <div
                 class="tab-panel ${index === 0 ? 'active' : ''}"
@@ -62,9 +62,31 @@ const TabsManager = {
                         ${pleno.duracion ? `<span class="pleno-duracion"><span class="material-icons-round">schedule</span>${pleno.duracion}</span>` : ''}
                     </div>
                 </div>
-                <div class="pleno-content">
-                    ${pleno.htmlContent}
+
+                <!-- Vista Toggle -->
+                <div class="view-toggle-container">
+                    <button class="view-toggle-btn active" data-view="dashboard">
+                        <span class="material-icons-round">dashboard</span>
+                        Vista Dashboard
+                    </button>
+                    <button class="view-toggle-btn" data-view="informe">
+                        <span class="material-icons-round">article</span>
+                        Vista Informe
+                    </button>
                 </div>
+
+                <!-- Vista Dashboard -->
+                <div class="tab-view tab-view-dashboard active">
+                    <div class="pleno-content">
+                        ${pleno.htmlContent}
+                    </div>
+                </div>
+
+                <!-- Vista Informe (Markdown) -->
+                <div class="tab-view tab-view-informe">
+                    <div class="md-content"></div>
+                </div>
+
                 ${this.renderDisqusSection(pleno)}
             </div>
         `).join('');
