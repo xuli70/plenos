@@ -1,6 +1,6 @@
 FROM ghcr.io/isso-comments/isso:latest
 
-COPY isso.conf /config/isso.conf
+COPY isso/isso.conf /config/isso.conf
 
 ENV ISSO_SETTINGS=/config/isso.conf
 
