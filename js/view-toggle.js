@@ -63,7 +63,7 @@ const ViewToggleController = {
 
         // Buscar el pleno en DataLoader
         const pleno = DataLoader.plenos.find(p => p.id === tabId);
-        if (!pleno || !pleno.markdownContent) {
+        if (!pleno || !pleno.content) {
             console.warn(`No se encontro markdown para pleno: ${tabId}`);
             return;
         }
@@ -75,7 +75,7 @@ const ViewToggleController = {
         }
 
         // Renderizar markdown
-        container.innerHTML = MarkdownParser.parse(pleno.markdownContent);
+        container.innerHTML = MarkdownParser.parse(pleno.content);
         this._renderedTabs.add(tabId);
     },
 
