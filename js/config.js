@@ -12,9 +12,9 @@ const CONFIG = {
     // Contraseña de desarrollo: "123" (CAMBIAR en producción via Coolify)
     passwordHash: 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',
 
-    // Disqus
-    disqus: {
-        shortname: 'plenos-lazarza', // Cambiar por tu shortname real
+    // Isso (sistema de comentarios self-hosted)
+    isso: {
+        url: 'https://isso.axcsol.com',
         enabled: true
     },
 
@@ -170,7 +170,7 @@ const CONFIG = {
 
 // Congelar configuración para evitar modificaciones
 Object.freeze(CONFIG);
-Object.freeze(CONFIG.disqus);
+Object.freeze(CONFIG.isso);
 Object.freeze(CONFIG.paths);
 Object.freeze(CONFIG.session);
 Object.freeze(CONFIG.sections);

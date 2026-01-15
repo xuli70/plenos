@@ -87,7 +87,7 @@ const TabsManager = {
                     <div class="pdf-viewer-container"></div>
                 </div>
 
-                ${this.renderDisqusSection(pleno)}
+                ${this.renderCommentsSection(pleno)}
             </div>
         `).join('');
 
@@ -110,23 +110,23 @@ const TabsManager = {
     },
 
     /**
-     * Renderiza la sección de Disqus
+     * Renderiza la sección de comentarios (Isso)
      */
-    renderDisqusSection(pleno) {
-        if (!CONFIG.disqus.enabled) return '';
+    renderCommentsSection(pleno) {
+        if (!CONFIG.isso?.enabled) return '';
 
         return `
-            <div class="disqus-section">
-                <div class="disqus-header">
-                    <h3 class="disqus-title">
+            <div class="comments-section">
+                <div class="comments-header">
+                    <h3 class="comments-title">
                         <span class="material-icons-round">forum</span>
                         Comentarios Ciudadanos
                     </h3>
-                    <p class="disqus-notice">
-                        Los comentarios requieren moderación previa antes de publicarse.
+                    <p class="comments-notice">
+                        Los comentarios requieren moderacion previa antes de publicarse.
                     </p>
                 </div>
-                <div id="disqus-${pleno.id}" class="disqus-container"></div>
+                <div id="comments-${pleno.id}" class="comments-container"></div>
             </div>
         `;
     },
@@ -164,10 +164,10 @@ const TabsManager = {
             // Scroll al inicio del contenido
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            // Cargar Disqus para este pleno
+            // Cargar Isso para este pleno
             const pleno = this.plenos.find(p => p.id === plenoId);
-            if (pleno && CONFIG.disqus.enabled) {
-                DisqusManager.load(plenoId, pleno.titulo);
+            if (pleno && CONFIG.isso?.enabled) {
+                IssoManager.load(plenoId, pleno.titulo);
             }
 
             this.currentTab = plenoId;

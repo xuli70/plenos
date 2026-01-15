@@ -1,0 +1,275 @@
+/* ===========================================
+   ISSO.CSS - Estilos para comentarios Isso
+   =========================================== */
+
+/* Contenedor principal de comentarios */
+.comments-section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: var(--surface-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.comments-section h3 {
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.comments-section h3::before {
+    content: 'chat';
+    font-family: 'Material Icons Round';
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.comments-container {
+    min-height: 100px;
+}
+
+/* Estilos personalizados para Isso */
+#isso-thread,
+[id^="isso-thread-"] {
+    font-family: var(--font-sans);
+}
+
+/* Formulario de comentarios */
+.isso-postbox {
+    background: var(--background-color);
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 1.5rem;
+}
+
+.isso-postbox .isso-input-wrapper {
+    margin-bottom: 0.75rem;
+}
+
+.isso-postbox input[type="text"],
+.isso-postbox input[type="email"],
+.isso-postbox textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    background: var(--surface-color);
+    color: var(--text-primary);
+    transition: border-color 0.2s ease;
+}
+
+.isso-postbox input[type="text"]:focus,
+.isso-postbox input[type="email"]:focus,
+.isso-postbox textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.isso-postbox textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Botones de Isso */
+.isso-postbox .isso-post-action input[type="submit"] {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.isso-postbox .isso-post-action input[type="submit"]:hover {
+    background: var(--primary-dark);
+}
+
+/* Comentarios individuales */
+.isso-comment {
+    background: var(--surface-color);
+    border-left: 3px solid var(--primary-color);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.isso-comment:hover {
+    background: var(--background-color);
+}
+
+/* Cabecera del comentario */
+.isso-comment-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.isso-comment-header .isso-author {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.isso-comment-header .isso-spacer {
+    color: var(--text-secondary);
+}
+
+.isso-comment-header a[href="#isso-"],
+.isso-comment-header .isso-permalink {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+}
+
+/* Contenido del comentario */
+.isso-comment .isso-text {
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.isso-comment .isso-text p {
+    margin: 0.5rem 0;
+}
+
+/* Acciones del comentario (responder, votar) */
+.isso-comment-footer {
+    margin-top: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.8rem;
+}
+
+.isso-comment-footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.isso-comment-footer a:hover {
+    color: var(--primary-color);
+}
+
+/* Votos */
+.isso-upvote,
+.isso-downvote {
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-sm);
+    transition: background-color 0.2s ease;
+}
+
+.isso-upvote:hover {
+    background: var(--success-bg);
+    color: var(--success-color);
+}
+
+.isso-downvote:hover {
+    background: var(--error-bg);
+    color: var(--error-color);
+}
+
+/* Comentarios anidados (respuestas) */
+.isso-follow-up {
+    margin-left: 1.5rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--border-color);
+}
+
+/* Avatar */
+.isso-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-right: 0.75rem;
+}
+
+/* Mensaje de moderacion */
+.isso-comment.isso-pending {
+    opacity: 0.7;
+    border-left-color: var(--warning-color);
+}
+
+.isso-comment.isso-pending::after {
+    content: 'Pendiente de aprobacion';
+    display: block;
+    font-size: 0.75rem;
+    color: var(--warning-color);
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* Estado de carga */
+.isso-loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+}
+
+/* Error de carga */
+.isso-error {
+    text-align: center;
+    padding: 2rem;
+    background: var(--error-bg);
+    border-radius: var(--radius-md);
+    color: var(--error-color);
+}
+
+.isso-error .material-icons-round {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.isso-error p {
+    margin-bottom: 1rem;
+}
+
+.isso-error .btn-secondary {
+    background: transparent;
+    border: 1px solid var(--error-color);
+    color: var(--error-color);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.isso-error .btn-secondary:hover {
+    background: var(--error-color);
+    color: white;
+}
+
+/* Sin comentarios */
+.isso-nocomments {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .comments-section {
+        padding: 1rem;
+    }
+
+    .isso-follow-up {
+        margin-left: 0.5rem;
+        padding-left: 0.5rem;
+    }
+
+    .isso-avatar {
+        width: 36px;
+        height: 36px;
+    }
+}
