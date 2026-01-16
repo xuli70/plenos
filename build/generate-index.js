@@ -16,8 +16,8 @@ const crypto = require('crypto');
 
 // Configuración
 const CONFIG = {
-    // Directorio donde están los informes MD (padre del directorio web)
-    informesDir: path.join(__dirname, '../../'),
+    // Directorio donde están los informes MD (dentro de web/informes/)
+    informesDir: path.join(__dirname, '../informes/'),
     // Archivo de salida
     outputFile: path.join(__dirname, '../data/plenos.json'),
     // Patrón de archivos
