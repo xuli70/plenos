@@ -19,8 +19,9 @@ const CONFIG = {
 
     // Rutas
     paths: {
-        informes: 'informes/',  // Ruta a los archivos INFORME_ECO_*.md
-        pdfActas: 'pdfActas/',  // Ruta a los archivos PDF de actas originales
+        informes: 'informes/',                     // Ruta a los archivos INFORME_ECO_*.md
+        informesPoliticos: 'informesPROPUESTAS/',  // Ruta a los archivos INFORME_POLITICO_*.md
+        pdfActas: 'pdfActas/',                     // Ruta a los archivos PDF de actas originales
         data: 'data/',
         plenosIndex: 'data/plenos.json'
     },
@@ -123,6 +124,79 @@ const CONFIG = {
             bgColor: 'var(--section-datos-bg)',
             icon: 'menu_book'
         },
+        // === SECCIONES POLITICAS ===
+        'corporacion': {
+            title: 'Mapa de la Corporación',
+            color: 'var(--section-corporacion)',
+            bgColor: 'var(--section-corporacion-bg)',
+            icon: 'groups'
+        },
+        'asuntos': {
+            title: 'Análisis de Asuntos',
+            color: 'var(--section-asuntos)',
+            bgColor: 'var(--section-asuntos-bg)',
+            icon: 'gavel'
+        },
+        'ruegos': {
+            title: 'Ruegos y Preguntas',
+            color: 'var(--section-ruegos)',
+            bgColor: 'var(--section-ruegos-bg)',
+            icon: 'help_outline'
+        },
+        'debates': {
+            title: 'Debates Destacados',
+            color: 'var(--section-debates)',
+            bgColor: 'var(--section-debates-bg)',
+            icon: 'forum'
+        },
+        'matriz': {
+            title: 'Matriz por Concejal',
+            color: 'var(--section-matriz)',
+            bgColor: 'var(--section-matriz-bg)',
+            icon: 'grid_on'
+        },
+        'indicadores-politicos': {
+            title: 'Indicadores Cuantitativos',
+            color: 'var(--section-indicadores-pol)',
+            bgColor: 'var(--section-indicadores-pol-bg)',
+            icon: 'analytics'
+        },
+        'ranking': {
+            title: 'Ranking de Implicación',
+            color: 'var(--section-ranking)',
+            bgColor: 'var(--section-ranking-bg)',
+            icon: 'leaderboard'
+        },
+        'silencios': {
+            title: 'Análisis de Silencios',
+            color: 'var(--section-silencios)',
+            bgColor: 'var(--section-silencios-bg)',
+            icon: 'volume_off'
+        },
+        'perfil': {
+            title: 'Perfil del Pleno',
+            color: 'var(--section-perfil)',
+            bgColor: 'var(--section-perfil-bg)',
+            icon: 'fingerprint'
+        },
+        'comparativa': {
+            title: 'Comparativa con Pleno Anterior',
+            color: 'var(--section-comparativa)',
+            bgColor: 'var(--section-comparativa-bg)',
+            icon: 'compare_arrows'
+        },
+        'conclusion': {
+            title: 'Conclusión Técnica',
+            color: 'var(--section-conclusion)',
+            bgColor: 'var(--section-conclusion-bg)',
+            icon: 'summarize'
+        },
+        'metodologia': {
+            title: 'Nota Metodológica',
+            color: 'var(--section-datos)',
+            bgColor: 'var(--section-datos-bg)',
+            icon: 'science'
+        },
         'default': {
             title: 'Información',
             color: 'var(--primary)',
@@ -133,6 +207,7 @@ const CONFIG = {
 
     // Palabras clave para detectar tipo de sección
     sectionKeywords: {
+        // === SECCIONES ECONOMICAS ===
         'datos de la sesi': 'datos',
         'datos del pleno': 'datos',
         'resumen ejecutivo': 'resumen',
@@ -153,7 +228,30 @@ const CONFIG = {
         'pendiente': 'seguimiento',
         'nota': 'notas',
         'auditor': 'notas',
-        'glosario': 'glosario'
+        'glosario': 'glosario',
+        // === SECCIONES POLITICAS ===
+        'mapa de la corporaci': 'corporacion',
+        'corporaci': 'corporacion',
+        'análisis asunto': 'asuntos',
+        'analisis asunto': 'asuntos',
+        'asunto por asunto': 'asuntos',
+        'ruegos y preguntas': 'ruegos',
+        'debates destacados': 'debates',
+        'matriz global': 'matriz',
+        'matriz por concejal': 'matriz',
+        'indicadores cuantitativo': 'indicadores-politicos',
+        'ranking de implicaci': 'ranking',
+        'ranking implicaci': 'ranking',
+        'silencios significativo': 'silencios',
+        'análisis de silencio': 'silencios',
+        'analisis de silencio': 'silencios',
+        'perfil del pleno': 'perfil',
+        'comparativa con pleno': 'comparativa',
+        'comparativa pleno anterior': 'comparativa',
+        'conclusión técnica': 'conclusion',
+        'conclusion tecnica': 'conclusion',
+        'nota metodológica': 'metodologia',
+        'nota metodologica': 'metodologia'
     },
 
     // Formato de fechas

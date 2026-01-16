@@ -39,6 +39,40 @@
     --section-rrhh: #7986CB;
     --section-rrhh-bg: #E8EAF6;
 
+    /* --- Colores Secciones Politicas --- */
+    --section-corporacion: #5C6BC0;
+    --section-corporacion-bg: #E8EAF6;
+
+    --section-asuntos: #7E57C2;
+    --section-asuntos-bg: #EDE7F6;
+
+    --section-ruegos: #26A69A;
+    --section-ruegos-bg: #E0F2F1;
+
+    --section-debates: #FF7043;
+    --section-debates-bg: #FBE9E7;
+
+    --section-matriz: #78909C;
+    --section-matriz-bg: #ECEFF1;
+
+    --section-indicadores-pol: #EC407A;
+    --section-indicadores-pol-bg: #FCE4EC;
+
+    --section-ranking: #FFA726;
+    --section-ranking-bg: #FFF3E0;
+
+    --section-silencios: #8D6E63;
+    --section-silencios-bg: #EFEBE9;
+
+    --section-perfil: #42A5F5;
+    --section-perfil-bg: #E3F2FD;
+
+    --section-comparativa: #66BB6A;
+    --section-comparativa-bg: #E8F5E9;
+
+    --section-conclusion: #AB47BC;
+    --section-conclusion-bg: #F3E5F5;
+
     /* --- Colores de Estado --- */
     --success: #2E7D32;
     --success-bg: #E8F5E9;

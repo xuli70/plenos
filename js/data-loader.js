@@ -83,11 +83,12 @@ const DataLoader = {
     },
 
     /**
-     * Carga el contenido MD de cada pleno
+     * Carga el contenido MD de cada pleno (economico y politico)
      */
     async loadPlenosContent() {
         const promises = this.plenos.map(async (pleno) => {
             try {
+                // Cargar informe economico
                 const response = await fetch(`${CONFIG.paths.informes}${pleno.filename}`);
 
                 if (!response.ok) {
@@ -110,6 +111,9 @@ const DataLoader = {
                 // Obtener tipo de pleno para badge
                 pleno.tipoInfo = Utils.getPlenoType(pleno.tipo);
 
+                // Cargar informe politico (si existe)
+                await this._loadPoliticalContent(pleno);
+
             } catch (error) {
                 console.error(`Error cargando ${pleno.filename}:`, error);
             }
@@ -119,6 +123,38 @@ const DataLoader = {
 
         // Filtrar plenos que no se pudieron cargar
         this.plenos = this.plenos.filter(p => p.htmlContent !== null);
+    },
+
+    /**
+     * Carga el contenido del informe politico de un pleno
+     */
+    async _loadPoliticalContent(pleno) {
+        if (!pleno.politicalFilename) {
+            pleno.politicalContent = null;
+            pleno.politicalHtmlContent = null;
+            return;
+        }
+
+        try {
+            const politicalUrl = `${CONFIG.paths.informesPoliticos}${pleno.politicalFilename}`;
+            const response = await fetch(politicalUrl);
+
+            if (!response.ok) {
+                console.warn(`No se encontro informe politico: ${pleno.politicalFilename}`);
+                pleno.politicalContent = null;
+                pleno.politicalHtmlContent = null;
+                return;
+            }
+
+            const content = await response.text();
+            pleno.politicalContent = content;
+            pleno.politicalHtmlContent = MarkdownParser.parse(content);
+
+        } catch (error) {
+            console.warn(`Error cargando informe politico ${pleno.politicalFilename}:`, error);
+            pleno.politicalContent = null;
+            pleno.politicalHtmlContent = null;
+        }
     },
 
     /**

@@ -1,10 +1,13 @@
 /* ===========================================
    VIEW-TOGGLE.JS - Controlador Vista Toggle
-   Alterna entre Vista Dashboard y Vista Informe (PDF)
+   Alterna entre Vista Economico, Politico y Acta PDF
    =========================================== */
 
 const ViewToggleController = {
     _renderedTabs: new Set(),
+
+    // Tipos de vista disponibles
+    VIEW_TYPES: ['dashboard', 'political', 'informe'],
 
     /**
      * Inicializa el controlador de Vista Toggle
@@ -38,18 +41,25 @@ const ViewToggleController = {
     },
 
     /**
-     * Cambia entre vistas Dashboard e Informe
+     * Cambia entre las 3 vistas: dashboard (economico), political, informe (PDF)
      */
     _switchView(tabPanel, viewType) {
-        const dashboardView = tabPanel.querySelector('.tab-view-dashboard');
-        const informeView = tabPanel.querySelector('.tab-view-informe');
+        // Ocultar todas las vistas
+        this.VIEW_TYPES.forEach(type => {
+            const view = tabPanel.querySelector(`.tab-view-${type}`);
+            if (view) {
+                view.classList.remove('active');
+            }
+        });
 
-        if (viewType === 'dashboard') {
-            dashboardView.classList.add('active');
-            informeView.classList.remove('active');
-        } else {
-            dashboardView.classList.remove('active');
-            informeView.classList.add('active');
+        // Mostrar la vista seleccionada
+        const selectedView = tabPanel.querySelector(`.tab-view-${viewType}`);
+        if (selectedView) {
+            selectedView.classList.add('active');
+        }
+
+        // Lazy loading solo para PDF (informe)
+        if (viewType === 'informe') {
             this._renderInforme(tabPanel);
         }
     },

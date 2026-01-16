@@ -63,22 +63,33 @@ const TabsManager = {
                     </div>
                 </div>
 
-                <!-- Vista Toggle -->
+                <!-- Vista Toggle: Economico / Politico / Acta PDF -->
                 <div class="view-toggle-container">
                     <button class="view-toggle-btn active" data-view="dashboard">
-                        <span class="material-icons-round">dashboard</span>
-                        Vista Dashboard
+                        <span class="material-icons-round">payments</span>
+                        <span class="btn-text">Económico</span>
+                    </button>
+                    <button class="view-toggle-btn" data-view="political">
+                        <span class="material-icons-round">how_to_vote</span>
+                        <span class="btn-text">Político</span>
                     </button>
                     <button class="view-toggle-btn" data-view="informe">
-                        <span class="material-icons-round">article</span>
-                        Vista Informe
+                        <span class="material-icons-round">picture_as_pdf</span>
+                        <span class="btn-text">Acta PDF</span>
                     </button>
                 </div>
 
-                <!-- Vista Dashboard -->
+                <!-- Vista Dashboard Economico -->
                 <div class="tab-view tab-view-dashboard active">
                     <div class="pleno-content">
                         ${pleno.htmlContent}
+                    </div>
+                </div>
+
+                <!-- Vista Dashboard Politico -->
+                <div class="tab-view tab-view-political">
+                    <div class="pleno-content political-content">
+                        ${pleno.politicalHtmlContent || '<div class="no-political-data"><span class="material-icons-round">info</span><p>No hay informe político disponible para este pleno</p></div>'}
                     </div>
                 </div>
 
