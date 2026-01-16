@@ -1,11 +1,15 @@
-FROM ghcr.io/isso-comments/isso:latest
+FROM python:3.11-alpine
 
-# Instalar dependencias necesarias
-USER root
-RUN apk add --no-cache gettext && \
-    pip install --no-cache-dir setuptools
+# Instalar dependencias del sistema
+RUN apk add --no-cache gettext sqlite
 
-# Copiar template de configuracion (NO el archivo final)
+# Instalar ISSO con todas sus dependencias
+RUN pip install --no-cache-dir isso
+
+# Crear directorio de configuracion
+RUN mkdir -p /config /db
+
+# Copiar template de configuracion
 COPY isso/isso.conf.template /config/isso.conf.template
 
 # Copiar entrypoint script y hacerlo ejecutable
@@ -21,5 +25,4 @@ EXPOSE 8080
 
 VOLUME ["/db"]
 
-# Usar entrypoint que genera isso.conf dinamicamente
 ENTRYPOINT ["/entrypoint.sh"]
