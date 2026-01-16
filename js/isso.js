@@ -88,16 +88,22 @@ const IssoManager = {
 
     /**
      * Renderiza el thread de comentarios (para cambio de tabs)
+     * IMPORTANTE: Usa Isso.init() porque createThreadElement() elimina el #isso-thread anterior
+     * Docs: https://isso-comments.de/docs/guides/advanced-integration/
      */
     renderThread(plenoId, plenoTitle) {
-        // Crear/actualizar el elemento
+        // Crear/actualizar el elemento (elimina el anterior)
         this.createThreadElement(plenoId);
 
-        // Forzar re-render si Isso ya está cargado
+        // Reinicializar Isso para el nuevo thread
         if (window.Isso) {
             // Esperar un tick para que el DOM se actualice
             setTimeout(() => {
-                window.Isso.fetchComments();
+                // init() es necesario cuando se elimina y recrea #isso-thread
+                // fetchComments() solo funciona si el elemento NO fue eliminado
+                window.Isso.init();
+                // Personalizar el formulario después de reinicializar
+                this.customizeForm();
             }, 100);
         }
     },
