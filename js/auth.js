@@ -25,11 +25,13 @@ const Auth = {
 
     /**
      * Guarda la sesión en sessionStorage
+     * Incluye el hash del password para invalidar sesiones si cambia
      */
     setSession() {
         const sessionData = {
             timestamp: Date.now(),
-            expires: Date.now() + CONFIG.session.duration
+            expires: Date.now() + CONFIG.session.duration,
+            passwordHash: CONFIG.passwordHash  // Vincula sesión al password actual
         };
         sessionStorage.setItem(CONFIG.session.key, JSON.stringify(sessionData));
     },
@@ -43,14 +45,24 @@ const Auth = {
 
     /**
      * Comprueba si hay una sesión válida
+     * Verifica tanto la expiración como que el hash del password no haya cambiado
      */
     isAuthenticated() {
         try {
             const sessionData = sessionStorage.getItem(CONFIG.session.key);
             if (!sessionData) return false;
 
-            const { expires } = JSON.parse(sessionData);
+            const { expires, passwordHash } = JSON.parse(sessionData);
+
+            // Verificar si expiró
             if (Date.now() > expires) {
+                this.clearSession();
+                return false;
+            }
+
+            // Verificar si el password cambió (redeploy con nuevo password)
+            if (passwordHash && passwordHash !== CONFIG.passwordHash) {
+                console.log('Sesión invalidada: el password ha sido actualizado');
                 this.clearSession();
                 return false;
             }
