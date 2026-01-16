@@ -1,8 +1,9 @@
 FROM ghcr.io/isso-comments/isso:latest
 
-# Instalar envsubst (gettext) para sustituir variables de entorno
+# Instalar dependencias necesarias
 USER root
-RUN apk add --no-cache gettext
+RUN apk add --no-cache gettext && \
+    pip install --no-cache-dir setuptools
 
 # Copiar template de configuracion (NO el archivo final)
 COPY isso/isso.conf.template /config/isso.conf.template
