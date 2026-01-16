@@ -182,12 +182,13 @@ function generateIndex() {
  * Genera el hash de la contraseña
  */
 function generatePasswordHash() {
-    const password = process.env.PLENOS_PASSWORD;
+    let password = process.env.PLENOS_PASSWORD;
 
+    // Si no hay variable de entorno, usar contraseña por defecto para desarrollo
     if (!password) {
         console.log('\nAdvertencia: PLENOS_PASSWORD no definida');
-        console.log('Usando contraseña por defecto para desarrollo');
-        return;
+        console.log('Usando contraseña por defecto "123" para desarrollo');
+        password = '123';  // Fallback para desarrollo
     }
 
     const hash = crypto.createHash('sha256').update(password).digest('hex');
@@ -201,7 +202,11 @@ function generatePasswordHash() {
             configContent = configContent.replace('%%PASSWORD_HASH%%', hash);
             fs.writeFileSync(CONFIG.configFile, configContent);
             console.log('Hash insertado en config.js');
+        } else {
+            console.log('Nota: No se encontro placeholder %%PASSWORD_HASH%% en config.js');
         }
+    } else {
+        console.error('Error: config.js no encontrado en', CONFIG.configFile);
     }
 
     return hash;
