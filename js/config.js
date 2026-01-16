@@ -7,10 +7,10 @@ const CONFIG = {
     siteName: 'Plenos Municipales',
     siteSubtitle: 'Ayuntamiento de La Zarza',
 
-    // Hash SHA-256 de la contraseña (se reemplaza en build)
-    // Para generar: echo -n "tu_password" | sha256sum
-    // Contraseña de desarrollo: "123" (CAMBIAR en producción via Coolify)
-    passwordHash: 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',
+    // Hash SHA-256 de la contraseña (se reemplaza en build por generate-index.js)
+    // El placeholder %%PASSWORD_HASH%% se sustituye durante 'npm run build'
+    // Configurar PLENOS_PASSWORD como Build Variable en Coolify
+    passwordHash: '%%PASSWORD_HASH%%',
 
     // Isso (sistema de comentarios self-hosted)
     isso: {
