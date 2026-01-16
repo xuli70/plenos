@@ -1,8 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 # entrypoint.sh - Genera isso.conf desde template con variables de entorno
-# Esto permite cambiar ISSO_ADMIN_PASSWORD en Coolify y que se aplique al reiniciar
 
 set -e
+
+echo "=== ISSO Entrypoint ==="
 
 # Verificar que la variable de entorno existe
 if [ -z "$ISSO_ADMIN_PASSWORD" ]; then
@@ -10,11 +11,18 @@ if [ -z "$ISSO_ADMIN_PASSWORD" ]; then
     exit 1
 fi
 
-# Generar isso.conf desde template reemplazando variables de entorno
-envsubst < /config/isso.conf.template > /config/isso.conf
+echo "Generando configuracion desde template..."
 
-echo "Configuracion generada correctamente"
+# Generar isso.conf desde template reemplazando variables de entorno
+envsubst '${ISSO_ADMIN_PASSWORD}' < /config/isso.conf.template > /config/isso.conf
+
+echo "Configuracion generada en /config/isso.conf"
 echo "Admin password configurada desde variable de entorno"
 
-# Iniciar Isso usando el modulo Python (comando correcto en esta imagen)
-exec python -m isso.run -c /config/isso.conf
+# Verificar que isso esta instalado
+which isso || echo "AVISO: comando isso no encontrado en PATH"
+
+echo "Iniciando servidor ISSO en 0.0.0.0:8080..."
+
+# Iniciar Isso en foreground (exec reemplaza el shell)
+exec isso -c /config/isso.conf

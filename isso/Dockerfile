@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     sqlite3 \
     gcc \
     python3-dev \
+    bash \
     && rm -rf /var/lib/apt/lists/*
 
 # Instalar ISSO con todas sus dependencias
@@ -14,8 +15,8 @@ RUN pip install --no-cache-dir isso
 # Limpiar compilador (ya no se necesita)
 RUN apt-get purge -y gcc python3-dev && apt-get autoremove -y
 
-# Crear directorio de configuracion
-RUN mkdir -p /config /db
+# Crear directorio de configuracion y base de datos
+RUN mkdir -p /config /db && chmod 777 /db
 
 # Copiar template de configuracion
 COPY isso/isso.conf.template /config/isso.conf.template
