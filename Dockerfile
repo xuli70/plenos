@@ -1,43 +1,24 @@
 # ===========================================
 # Dockerfile - Plenos La Zarza
 # ===========================================
-# Multi-stage build: Node.js (build) + Nginx (produccion)
+# Single-stage build: Nginx con archivos estaticos
+# NOTA: plenos.json ya está en el repositorio, no se regenera
 # ===========================================
 
-# ===========================================
-# Stage 1: Build con Node.js
-# ===========================================
-FROM node:20-alpine AS builder
-
-WORKDIR /app
-
-# Copiar package.json y instalar dependencias
-COPY package.json package-lock.json* ./
-RUN npm install
-
-# Copiar codigo fuente
-COPY . .
-
-# Ejecutar build (genera plenos.json - password se procesa en RUNTIME)
-RUN npm run build
-
-# ===========================================
-# Stage 2: Produccion con Nginx
-# ===========================================
 FROM nginx:alpine
 
 # Copiar configuracion de nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copiar archivos del builder (con config.js modificado)
-COPY --from=builder /app/index.html /usr/share/nginx/html/
-COPY --from=builder /app/login.html /usr/share/nginx/html/
-COPY --from=builder /app/aviso-legal.html /usr/share/nginx/html/
-COPY --from=builder /app/css/ /usr/share/nginx/html/css/
-COPY --from=builder /app/js/ /usr/share/nginx/html/js/
-COPY --from=builder /app/data/ /usr/share/nginx/html/data/
-COPY --from=builder /app/informes/ /usr/share/nginx/html/informes/
-COPY --from=builder /app/pdfActas/ /usr/share/nginx/html/pdfActas/
+# Copiar archivos estaticos directamente (sin build stage)
+COPY index.html /usr/share/nginx/html/
+COPY login.html /usr/share/nginx/html/
+COPY aviso-legal.html /usr/share/nginx/html/
+COPY css/ /usr/share/nginx/html/css/
+COPY js/ /usr/share/nginx/html/js/
+COPY data/ /usr/share/nginx/html/data/
+COPY informes/ /usr/share/nginx/html/informes/
+COPY pdfActas/ /usr/share/nginx/html/pdfActas/
 
 # Copiar entrypoint script
 COPY entrypoint.sh /entrypoint.sh
