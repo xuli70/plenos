@@ -1,0 +1,37 @@
+[general]
+dbpath = /db/comments.db
+host = https://plenos.axcsol.com/
+max-age = 15m
+notify = stdout
+
+[moderation]
+; PRE-MODERACION: comentarios requieren aprobacion
+enabled = true
+approve-if-email-previously-approved = false
+purge-after = 30d
+
+[server]
+listen = http://0.0.0.0:8080/
+
+[guard]
+enabled = true
+ratelimit = 2
+direct-reply = 3
+reply-to-self = false
+; NOMBRE OBLIGATORIO
+require-author = true
+; EMAIL OPCIONAL
+require-email = false
+
+[markup]
+options = strikethrough, autolink
+allowed-elements = a, blockquote, code, em, strong, p, ul, ol, li
+allowed-attributes = a[href]
+
+[hash]
+salt = Eesh5OngohquahGe
+algorithm = pbkdf2
+
+[admin]
+enabled = true
+password = ${ISSO_ADMIN_PASSWORD}
