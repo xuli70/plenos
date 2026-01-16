@@ -60,9 +60,11 @@ const Auth = {
                 return false;
             }
 
-            // Verificar si el password cambió (redeploy con nuevo password)
-            if (passwordHash && passwordHash !== CONFIG.passwordHash) {
-                console.log('Sesión invalidada: el password ha sido actualizado');
+            // Verificar si el password cambió o si es una sesión antigua sin passwordHash
+            // - !passwordHash: sesiones creadas antes del fix (no tienen hash guardado)
+            // - passwordHash !== CONFIG.passwordHash: el password fue cambiado en Coolify
+            if (!passwordHash || passwordHash !== CONFIG.passwordHash) {
+                console.log('Sesión invalidada: ' + (!passwordHash ? 'sesión antigua sin hash' : 'password actualizado'));
                 this.clearSession();
                 return false;
             }
