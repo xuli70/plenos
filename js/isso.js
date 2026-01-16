@@ -76,7 +76,7 @@ const IssoManager = {
 
         // Crear elemento section para Isso
         const section = document.createElement('section');
-        section.id = `isso-thread-${plenoId}`;
+        section.id = 'isso-thread';
         section.setAttribute('data-isso-id', `/pleno/${plenoId}/`);
         if (plenoTitle) {
             section.setAttribute('data-title', plenoTitle);
