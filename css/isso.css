@@ -6,7 +6,7 @@
 .comments-section {
     margin-top: 2rem;
     padding: 1.5rem;
-    background: var(--surface-color);
+    background: var(--surface);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
 }
@@ -25,7 +25,7 @@
     content: 'chat';
     font-family: 'Material Icons Round';
     font-size: 1.5rem;
-    color: var(--primary-color);
+    color: var(--primary);
 }
 
 .comments-container {
@@ -40,7 +40,7 @@
 
 /* Formulario de comentarios */
 .isso-postbox {
-    background: var(--background-color);
+    background: var(--background);
     padding: 1rem;
     border-radius: var(--radius-md);
     margin-bottom: 1.5rem;
@@ -55,11 +55,11 @@
 .isso-postbox textarea {
     width: 100%;
     padding: 0.75rem;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     font-family: var(--font-sans);
     font-size: 0.875rem;
-    background: var(--surface-color);
+    background: var(--surface);
     color: var(--text-primary);
     transition: border-color 0.2s ease;
 }
@@ -68,7 +68,7 @@
 .isso-postbox input[type="email"]:focus,
 .isso-postbox textarea:focus {
     outline: none;
-    border-color: var(--primary-color);
+    border-color: var(--primary);
     box-shadow: 0 0 0 3px var(--primary-light);
 }
 
@@ -79,7 +79,7 @@
 
 /* Botones de Isso */
 .isso-postbox .isso-post-action input[type="submit"] {
-    background: var(--primary-color);
+    background: var(--primary);
     color: white;
     border: none;
     padding: 0.75rem 1.5rem;
@@ -95,15 +95,15 @@
 
 /* Comentarios individuales */
 .isso-comment {
-    background: var(--surface-color);
-    border-left: 3px solid var(--primary-color);
+    background: var(--surface);
+    border-left: 3px solid var(--primary);
     padding: 1rem;
     margin-bottom: 1rem;
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
 .isso-comment:hover {
-    background: var(--background-color);
+    background: var(--background);
 }
 
 /* Cabecera del comentario */
@@ -156,7 +156,7 @@
 }
 
 .isso-comment-footer a:hover {
-    color: var(--primary-color);
+    color: var(--primary);
 }
 
 /* Votos */
@@ -170,19 +170,19 @@
 
 .isso-upvote:hover {
     background: var(--success-bg);
-    color: var(--success-color);
+    color: var(--success);
 }
 
 .isso-downvote:hover {
     background: var(--error-bg);
-    color: var(--error-color);
+    color: var(--error);
 }
 
 /* Comentarios anidados (respuestas) */
 .isso-follow-up {
     margin-left: 1.5rem;
     padding-left: 1rem;
-    border-left: 2px solid var(--border-color);
+    border-left: 2px solid var(--border);
 }
 
 /* Avatar */
@@ -196,14 +196,14 @@
 /* Mensaje de moderacion */
 .isso-comment.isso-pending {
     opacity: 0.7;
-    border-left-color: var(--warning-color);
+    border-left-color: var(--warning);
 }
 
 .isso-comment.isso-pending::after {
     content: 'Pendiente de aprobacion';
     display: block;
     font-size: 0.75rem;
-    color: var(--warning-color);
+    color: var(--warning);
     margin-top: 0.5rem;
     font-style: italic;
 }
@@ -221,7 +221,7 @@
     padding: 2rem;
     background: var(--error-bg);
     border-radius: var(--radius-md);
-    color: var(--error-color);
+    color: var(--error);
 }
 
 .isso-error .material-icons-round {
@@ -236,8 +236,8 @@
 
 .isso-error .btn-secondary {
     background: transparent;
-    border: 1px solid var(--error-color);
-    color: var(--error-color);
+    border: 1px solid var(--error);
+    color: var(--error);
     padding: 0.5rem 1rem;
     border-radius: var(--radius-sm);
     cursor: pointer;
@@ -245,7 +245,7 @@
 }
 
 .isso-error .btn-secondary:hover {
-    background: var(--error-color);
+    background: var(--error);
     color: white;
 }
 
@@ -255,6 +255,64 @@
     padding: 2rem;
     color: var(--text-secondary);
     font-style: italic;
+}
+
+/* ===========================================
+   OCULTAR CAMPOS EMAIL Y WEB
+   =========================================== */
+
+/* Ocultar campo Email */
+.isso-postbox .isso-input-wrapper input[type="email"],
+.isso-postbox input[type="email"] {
+    display: none !important;
+}
+
+/* Ocultar campo Website/Web */
+.isso-postbox .isso-input-wrapper input[name="website"],
+.isso-postbox input[name="website"],
+.isso-postbox .isso-input-wrapper input[placeholder*="eb"],
+.isso-postbox .isso-input-wrapper input[placeholder*="sitio"] {
+    display: none !important;
+}
+
+/* Ocultar wrapper vacío si usa :has() (navegadores modernos) */
+.isso-postbox .isso-input-wrapper:has(input[type="email"]),
+.isso-postbox .isso-input-wrapper:has(input[name="website"]) {
+    display: none !important;
+}
+
+/* ===========================================
+   ESTILOS PARA CAMPOS DE APELLIDOS
+   =========================================== */
+
+.isso-apellidos-wrapper {
+    margin-bottom: 0.75rem;
+}
+
+.isso-apellidos-wrapper input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-family);
+    font-size: 0.875rem;
+    background: var(--surface);
+    color: var(--text-primary);
+    transition: border-color 0.2s ease;
+}
+
+.isso-apellidos-wrapper input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.isso-apellidos-wrapper input::placeholder {
+    color: var(--text-secondary);
+}
+
+.isso-apellidos-wrapper input:invalid {
+    border-color: var(--error);
 }
 
 /* Responsive */

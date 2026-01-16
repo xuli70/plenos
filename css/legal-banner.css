@@ -25,15 +25,16 @@
     visibility: visible;
 }
 
-/* Modal del banner */
+/* Modal del banner - IMPACTANTE con borde rojo */
 .legal-banner-modal {
-    background: var(--bg-primary);
+    background: #FFFFFF;
+    border: 3px solid var(--error);
     border-radius: 16px;
     max-width: 600px;
     width: 100%;
     max-height: 90vh;
     overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 60px rgba(198, 40, 40, 0.3), 0 0 0 8px rgba(198, 40, 40, 0.1);
     transform: translateY(20px);
     transition: transform 0.3s ease;
 }
@@ -42,9 +43,9 @@
     transform: translateY(0);
 }
 
-/* Header del banner */
+/* Header del banner - ROJO IMPACTANTE */
 .legal-banner-header {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    background: linear-gradient(135deg, var(--error) 0%, #B71C1C 100%);
     color: white;
     padding: 1.5rem;
     text-align: center;
@@ -80,14 +81,14 @@
 }
 
 .legal-banner-content strong {
-    color: var(--primary-color);
+    color: var(--primary);
 }
 
 /* Footer del banner */
 .legal-banner-footer {
     padding: 1.5rem;
-    background: var(--bg-secondary);
-    border-top: 1px solid var(--border-color);
+    background: var(--surface-variant);
+    border-top: 1px solid var(--divider);
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -99,7 +100,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    color: var(--primary-color);
+    color: var(--primary);
     text-decoration: none;
     font-size: 0.875rem;
     font-weight: 500;
@@ -123,7 +124,7 @@
     gap: 0.5rem;
     width: 100%;
     padding: 1rem 1.5rem;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     color: white;
     border: none;
     border-radius: 8px;

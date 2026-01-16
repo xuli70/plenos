@@ -57,6 +57,8 @@ const IssoManager = {
             this.scriptLoaded = true;
             this.loaded = true;
             // El elemento ya existe, Isso se inicializó automáticamente
+            // Personalizar el formulario después de que cargue
+            this.customizeForm();
         };
 
         script.onerror = () => {
@@ -137,5 +139,126 @@ const IssoManager = {
      */
     reset() {
         this.currentIdentifier = null;
+    },
+
+    /**
+     * Personaliza el formulario de Isso añadiendo campos de apellidos
+     */
+    customizeForm() {
+        // MutationObserver para detectar cuando Isso renderiza el formulario
+        const observer = new MutationObserver((mutations, obs) => {
+            const nameInput = document.querySelector('.isso-postbox input[name="author"]');
+            if (nameInput && !document.getElementById('isso-primer-apellido')) {
+                this.injectApellidoFields(nameInput);
+                this.interceptSubmit();
+                obs.disconnect();
+            }
+        });
+
+        // Observar cambios en el DOM
+        const container = document.getElementById(`comments-${this.currentIdentifier}`);
+        if (container) {
+            observer.observe(container, { childList: true, subtree: true });
+        }
+
+        // También intentar inmediatamente por si ya existe
+        setTimeout(() => {
+            const nameInput = document.querySelector('.isso-postbox input[name="author"]');
+            if (nameInput && !document.getElementById('isso-primer-apellido')) {
+                this.injectApellidoFields(nameInput);
+                this.interceptSubmit();
+                observer.disconnect();
+            }
+        }, 500);
+    },
+
+    /**
+     * Inyecta los campos de apellidos después del campo nombre
+     */
+    injectApellidoFields(nameInput) {
+        const wrapper = nameInput.closest('.isso-input-wrapper') || nameInput.parentElement;
+        if (!wrapper) return;
+
+        // Cambiar placeholder del nombre
+        nameInput.placeholder = 'Nombre (obligatorio)';
+
+        // Crear contenedores para apellidos
+        const apellido1Wrapper = document.createElement('div');
+        apellido1Wrapper.className = 'isso-input-wrapper isso-apellidos-wrapper';
+        apellido1Wrapper.innerHTML = `
+            <input type="text" id="isso-primer-apellido" name="primer_apellido"
+                   placeholder="Primer Apellido (obligatorio)" required>
+        `;
+
+        const apellido2Wrapper = document.createElement('div');
+        apellido2Wrapper.className = 'isso-input-wrapper isso-apellidos-wrapper';
+        apellido2Wrapper.innerHTML = `
+            <input type="text" id="isso-segundo-apellido" name="segundo_apellido"
+                   placeholder="Segundo Apellido (obligatorio)" required>
+        `;
+
+        // Insertar después del wrapper del nombre
+        wrapper.insertAdjacentElement('afterend', apellido2Wrapper);
+        wrapper.insertAdjacentElement('afterend', apellido1Wrapper);
+    },
+
+    /**
+     * Intercepta el envío del formulario para combinar nombre y apellidos
+     */
+    interceptSubmit() {
+        const postbox = document.querySelector('.isso-postbox');
+        if (!postbox) return;
+
+        // Buscar el botón de submit
+        const submitBtn = postbox.querySelector('input[type="submit"]');
+        if (!submitBtn) return;
+
+        // Interceptar click en el botón
+        submitBtn.addEventListener('click', (e) => {
+            const nombre = document.querySelector('.isso-postbox input[name="author"]');
+            const apellido1 = document.getElementById('isso-primer-apellido');
+            const apellido2 = document.getElementById('isso-segundo-apellido');
+
+            if (!nombre || !apellido1 || !apellido2) return;
+
+            // Validar que todos los campos están completos
+            const nombreVal = nombre.value.trim();
+            const apellido1Val = apellido1.value.trim();
+            const apellido2Val = apellido2.value.trim();
+
+            if (!nombreVal) {
+                e.preventDefault();
+                e.stopPropagation();
+                nombre.focus();
+                alert('El campo Nombre es obligatorio');
+                return false;
+            }
+
+            if (!apellido1Val) {
+                e.preventDefault();
+                e.stopPropagation();
+                apellido1.focus();
+                alert('El campo Primer Apellido es obligatorio');
+                return false;
+            }
+
+            if (!apellido2Val) {
+                e.preventDefault();
+                e.stopPropagation();
+                apellido2.focus();
+                alert('El campo Segundo Apellido es obligatorio');
+                return false;
+            }
+
+            // Combinar nombre completo: "Nombre PrimerApellido SegundoApellido"
+            nombre.value = `${nombreVal} ${apellido1Val} ${apellido2Val}`;
+
+            // Limpiar campos de apellidos para la próxima vez
+            setTimeout(() => {
+                apellido1.value = '';
+                apellido2.value = '';
+            }, 100);
+
+        }, true); // Usar capture para interceptar antes que Isso
     }
 };
