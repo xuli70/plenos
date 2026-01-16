@@ -122,8 +122,8 @@ const TabsManager = {
                         <span class="material-icons-round">forum</span>
                         Comentarios Ciudadanos
                     </h3>
-                    <p class="comments-notice">
-                        Los comentarios requieren moderacion previa antes de publicarse.
+                    <p class="comments-notice comments-notice--highlight">
+                        Este espacio está pensado para el diálogo constructivo. Te invitamos a comentar con respeto, empatía y responsabilidad. Los comentarios serán moderados antes de publicarse.
                     </p>
                 </div>
                 <div id="comments-${pleno.id}" class="comments-container"></div>

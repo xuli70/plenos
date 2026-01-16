@@ -32,6 +32,26 @@
     min-height: 100px;
 }
 
+/* Aviso de moderacion */
+.comments-notice {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+}
+
+/* Aviso destacado - Estilo llamativo */
+.comments-notice--highlight {
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    border-left: 4px solid #ff9800;
+    padding: 1rem 1.25rem;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    color: #e65100;
+    font-weight: 500;
+    line-height: 1.6;
+    box-shadow: 0 2px 8px rgba(255, 152, 0, 0.15);
+    margin-top: 1rem;
+}
+
 /* Estilos personalizados para Isso */
 #isso-thread,
 [id^="isso-thread-"] {
