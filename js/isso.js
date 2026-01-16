@@ -32,6 +32,12 @@ const IssoManager = {
      * Carga el script de Isso
      */
     loadScript() {
+        // CRÍTICO: Crear el elemento #isso-thread ANTES de cargar el script
+        // El script embed.min.js busca #isso-thread al auto-ejecutarse
+        if (this.currentIdentifier) {
+            this.createThreadElement(this.currentIdentifier);
+        }
+
         const script = document.createElement('script');
         script.src = `${this.issoUrl}/js/embed.min.js`;
         script.setAttribute('data-isso', `${this.issoUrl}/`);
@@ -50,10 +56,7 @@ const IssoManager = {
         script.onload = () => {
             this.scriptLoaded = true;
             this.loaded = true;
-            // Renderizar el thread actual
-            if (this.currentIdentifier) {
-                this.renderThread(this.currentIdentifier);
-            }
+            // El elemento ya existe, Isso se inicializó automáticamente
         };
 
         script.onerror = () => {
@@ -65,9 +68,9 @@ const IssoManager = {
     },
 
     /**
-     * Renderiza el thread de comentarios
+     * Crea el elemento #isso-thread en el contenedor
      */
-    renderThread(plenoId, plenoTitle) {
+    createThreadElement(plenoId) {
         const container = document.getElementById(`comments-${plenoId}`);
         if (!container) return;
 
@@ -78,10 +81,15 @@ const IssoManager = {
         const section = document.createElement('section');
         section.id = 'isso-thread';
         section.setAttribute('data-isso-id', `/pleno/${plenoId}/`);
-        if (plenoTitle) {
-            section.setAttribute('data-title', plenoTitle);
-        }
         container.appendChild(section);
+    },
+
+    /**
+     * Renderiza el thread de comentarios (para cambio de tabs)
+     */
+    renderThread(plenoId, plenoTitle) {
+        // Crear/actualizar el elemento
+        this.createThreadElement(plenoId);
 
         // Forzar re-render si Isso ya está cargado
         if (window.Isso) {
