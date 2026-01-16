@@ -16,5 +16,5 @@ envsubst < /config/isso.conf.template > /config/isso.conf
 echo "Configuracion generada correctamente"
 echo "Admin password configurada desde variable de entorno"
 
-# Iniciar Isso
-exec isso -c /config/isso.conf
+# Iniciar Isso usando el modulo Python (comando correcto en esta imagen)
+exec python -m isso.run -c /config/isso.conf
