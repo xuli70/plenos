@@ -14,6 +14,9 @@ const App = {
             return;
         }
 
+        // Mostrar banner legal (solo si usuario autenticado)
+        LegalBanner.init();
+
         // Configurar botón de logout
         this.setupLogout();
 

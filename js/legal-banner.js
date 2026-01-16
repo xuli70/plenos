@@ -130,7 +130,5 @@ const LegalBanner = {
     }
 };
 
-// Inicializar cuando el DOM este listo
-document.addEventListener('DOMContentLoaded', () => {
-    LegalBanner.init();
-});
+// NOTA: LegalBanner.init() se llama desde main.js DESPUES de verificar autenticacion
+// Esto evita que el banner se muestre y desaparezca si el usuario no esta autenticado
