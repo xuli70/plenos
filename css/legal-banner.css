@@ -1,0 +1,186 @@
+/* ===========================================
+   LEGAL-BANNER.CSS - Banner de Aviso Legal
+   =========================================== */
+
+/* Overlay oscuro */
+.legal-banner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.legal-banner-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Modal del banner */
+.legal-banner-modal {
+    background: var(--bg-primary);
+    border-radius: 16px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.legal-banner-overlay.visible .legal-banner-modal {
+    transform: translateY(0);
+}
+
+/* Header del banner */
+.legal-banner-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.legal-banner-header .icon {
+    font-size: 48px;
+    margin-bottom: 0.5rem;
+}
+
+.legal-banner-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Contenido del banner */
+.legal-banner-content {
+    padding: 1.5rem;
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.legal-banner-content p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.legal-banner-content p:last-child {
+    margin-bottom: 0;
+}
+
+.legal-banner-content strong {
+    color: var(--primary-color);
+}
+
+/* Footer del banner */
+.legal-banner-footer {
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Link al aviso legal completo */
+.legal-banner-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.legal-banner-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+.legal-banner-link .material-icons-round {
+    font-size: 18px;
+}
+
+/* Boton de aceptar */
+.legal-banner-accept {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.legal-banner-accept:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.4);
+}
+
+.legal-banner-accept:active {
+    transform: translateY(0);
+}
+
+.legal-banner-accept .material-icons-round {
+    font-size: 20px;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .legal-banner-modal {
+        max-width: 100%;
+        margin: 0.5rem;
+        border-radius: 12px;
+    }
+
+    .legal-banner-header {
+        padding: 1rem;
+    }
+
+    .legal-banner-header .icon {
+        font-size: 36px;
+    }
+
+    .legal-banner-header h2 {
+        font-size: 1.25rem;
+    }
+
+    .legal-banner-content {
+        padding: 1rem;
+        max-height: 40vh;
+    }
+
+    .legal-banner-content p {
+        font-size: 0.875rem;
+    }
+
+    .legal-banner-footer {
+        padding: 1rem;
+    }
+
+    .legal-banner-accept {
+        padding: 0.875rem 1rem;
+        font-size: 0.9375rem;
+    }
+}
