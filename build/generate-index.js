@@ -12,7 +12,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const crypto = require('crypto');
 
 // Configuración
 const CONFIG = {
@@ -21,9 +20,8 @@ const CONFIG = {
     // Archivo de salida
     outputFile: path.join(__dirname, '../data/plenos.json'),
     // Patrón de archivos
-    filePattern: /^INFORME_ECO_(\d{4}-\d{2}-\d{2})\.md$/,
-    // Archivo de configuración JS
-    configFile: path.join(__dirname, '../js/config.js')
+    filePattern: /^INFORME_ECO_(\d{4}-\d{2}-\d{2})\.md$/
+    // NOTA: configFile eliminado - hash de password se genera en RUNTIME
 };
 
 // Meses en español
@@ -178,39 +176,8 @@ function generateIndex() {
     return plenos;
 }
 
-/**
- * Genera el hash de la contraseña
- */
-function generatePasswordHash() {
-    let password = process.env.PLENOS_PASSWORD;
-
-    // Si no hay variable de entorno, usar contraseña por defecto para desarrollo
-    if (!password) {
-        console.log('\nAdvertencia: PLENOS_PASSWORD no definida');
-        console.log('Usando contraseña por defecto "123" para desarrollo');
-        password = '123';  // Fallback para desarrollo
-    }
-
-    const hash = crypto.createHash('sha256').update(password).digest('hex');
-    console.log(`\nHash de contraseña generado: ${hash.substring(0, 16)}...`);
-
-    // Actualizar config.js con el hash
-    if (fs.existsSync(CONFIG.configFile)) {
-        let configContent = fs.readFileSync(CONFIG.configFile, 'utf-8');
-
-        if (configContent.includes('%%PASSWORD_HASH%%')) {
-            configContent = configContent.replace('%%PASSWORD_HASH%%', hash);
-            fs.writeFileSync(CONFIG.configFile, configContent);
-            console.log('Hash insertado en config.js');
-        } else {
-            console.log('Nota: No se encontro placeholder %%PASSWORD_HASH%% en config.js');
-        }
-    } else {
-        console.error('Error: config.js no encontrado en', CONFIG.configFile);
-    }
-
-    return hash;
-}
+// NOTA: La generación de hash de password se hace en RUNTIME via entrypoint.sh
+// Esto permite cambiar el password sin rebuild de la imagen Docker
 
 // Ejecutar si es script principal
 if (require.main === module) {
@@ -220,12 +187,13 @@ if (require.main === module) {
 
     try {
         generateIndex();
-        generatePasswordHash();
+        // Password hash se genera en RUNTIME (entrypoint.sh)
         console.log('\n¡Build completado exitosamente!');
+        console.log('NOTA: El hash de password se genera al arrancar el contenedor');
     } catch (error) {
         console.error('\nError durante el build:', error);
         process.exit(1);
     }
 }
 
-module.exports = { generateIndex, generatePasswordHash };
+module.exports = { generateIndex };

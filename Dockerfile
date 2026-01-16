@@ -18,11 +18,7 @@ RUN npm install
 # Copiar codigo fuente
 COPY . .
 
-# Recibir contrasena como build argument
-ARG PLENOS_PASSWORD
-ENV PLENOS_PASSWORD=$PLENOS_PASSWORD
-
-# Ejecutar build (genera hash y reemplaza placeholder en config.js)
+# Ejecutar build (genera plenos.json - password se procesa en RUNTIME)
 RUN npm run build
 
 # ===========================================
@@ -43,6 +39,10 @@ COPY --from=builder /app/data/ /usr/share/nginx/html/data/
 COPY --from=builder /app/informes/ /usr/share/nginx/html/informes/
 COPY --from=builder /app/pdfActas/ /usr/share/nginx/html/pdfActas/
 
+# Copiar entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 # Exponer puerto
 EXPOSE 80
 
@@ -50,5 +50,5 @@ EXPOSE 80
 HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
     CMD wget -q --spider http://127.0.0.1/ || exit 1
 
-# Comando de inicio
-CMD ["nginx", "-g", "daemon off;"]
+# Entrypoint procesa password y arranca nginx
+ENTRYPOINT ["/entrypoint.sh"]
