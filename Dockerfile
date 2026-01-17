@@ -21,6 +21,7 @@ COPY informes/ /usr/share/nginx/html/informes/
 COPY informesPROPUESTAS/ /usr/share/nginx/html/informesPROPUESTAS/
 COPY informesPREGUNTAS/ /usr/share/nginx/html/informesPREGUNTAS/
 COPY pdfActas/ /usr/share/nginx/html/pdfActas/
+COPY ResultadosBOP/ /usr/share/nginx/html/ResultadosBOP/
 
 # Copiar entrypoint script
 COPY entrypoint.sh /entrypoint.sh
