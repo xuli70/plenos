@@ -24,7 +24,18 @@ const CONFIG = {
         informesDebate: 'informesPREGUNTAS/',      // Ruta a los archivos INFORME_PREGUNTAS_*.md
         pdfActas: 'pdfActas/',                     // Ruta a los archivos PDF de actas originales
         data: 'data/',
-        plenosIndex: 'data/plenos.json'
+        plenosIndex: 'data/plenos.json',
+        // BOP - Boletin Oficial de la Provincia
+        bopData: 'ResultadosBOP/resultados_bop_la_zarza_2026-01-17.json'
+    },
+
+    // Configuracion BOP (Boletin Oficial de la Provincia)
+    bop: {
+        enabled: true,
+        fecha: '2026-01-17',
+        fechaFormateada: '17 de enero de 2026',
+        fechaCorta: '17/01/2026',
+        titulo: 'BOP'
     },
 
     // Sesión
@@ -270,6 +281,7 @@ const CONFIG = {
 Object.freeze(CONFIG);
 Object.freeze(CONFIG.isso);
 Object.freeze(CONFIG.paths);
+Object.freeze(CONFIG.bop);
 Object.freeze(CONFIG.session);
 Object.freeze(CONFIG.sections);
 Object.freeze(CONFIG.sectionKeywords);

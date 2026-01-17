@@ -1,13 +1,15 @@
 /* ===========================================
    VIEW-TOGGLE.JS - Controlador Vista Toggle
    Alterna entre Vista Economico, Politico, Debate y Acta PDF
+   Incluye soporte para vistas BOP (Resultado / Debate)
    =========================================== */
 
 const ViewToggleController = {
     _renderedTabs: new Set(),
+    _bopRendered: false,
 
-    // Tipos de vista disponibles
-    VIEW_TYPES: ['dashboard', 'political', 'debate', 'informe'],
+    // Tipos de vista disponibles (incluyendo BOP)
+    VIEW_TYPES: ['dashboard', 'political', 'debate', 'informe', 'bop-resultado', 'bop-debate'],
 
     /**
      * Inicializa el controlador de Vista Toggle
@@ -41,7 +43,7 @@ const ViewToggleController = {
     },
 
     /**
-     * Cambia entre las 4 vistas: dashboard (economico), political, debate, informe (PDF)
+     * Cambia entre vistas: dashboard, political, debate, informe (PDF), bop-resultado, bop-debate
      */
     _switchView(tabPanel, viewType) {
         // Ocultar todas las vistas
@@ -58,10 +60,40 @@ const ViewToggleController = {
             selectedView.classList.add('active');
         }
 
-        // Lazy loading solo para PDF (informe)
+        // Lazy loading segun tipo de vista
         if (viewType === 'informe') {
             this._renderInforme(tabPanel);
+        } else if (viewType === 'bop-resultado') {
+            this._renderBopDashboard(tabPanel);
         }
+    },
+
+    /**
+     * Renderiza el dashboard BOP
+     * @private
+     */
+    _renderBopDashboard(tabPanel) {
+        // Evitar renderizado multiple
+        if (this._bopRendered) return;
+
+        // Verificar que BopDashboard existe
+        if (typeof BopDashboard === 'undefined') {
+            console.warn('[ViewToggle] BopDashboard no disponible');
+            return;
+        }
+
+        const container = tabPanel.querySelector('.bop-dashboard-container');
+        if (!container) {
+            console.warn('[ViewToggle] No se encontro .bop-dashboard-container');
+            return;
+        }
+
+        // Solo renderizar si no se ha hecho
+        if (!BopDashboard.isRendered()) {
+            BopDashboard.render(container);
+        }
+
+        this._bopRendered = true;
     },
 
     /**

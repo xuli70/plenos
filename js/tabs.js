@@ -7,12 +7,14 @@ const TabsManager = {
     navContainer: null,
     currentTab: null,
     plenos: [],
+    bopEnabled: false,
 
     /**
      * Inicializa el sistema de tabs
      */
     init(plenos) {
         this.plenos = plenos;
+        this.bopEnabled = CONFIG.bop?.enabled || false;
         this.container = document.getElementById('tabsContent');
         this.navContainer = document.getElementById('tabsNav');
 
@@ -31,13 +33,24 @@ const TabsManager = {
      * Renderiza los tabs y su contenido
      */
     render() {
-        // Generar navegación de tabs
-        this.navContainer.innerHTML = this.plenos.map((pleno, index) => `
+        // Determinar si BOP es el primer tab activo
+        const bopIsFirst = this.bopEnabled;
+
+        // Generar navegación de tabs (BOP primero si está habilitado)
+        let tabsNav = '';
+
+        // Tab BOP primero
+        if (this.bopEnabled) {
+            tabsNav += this._renderBopTab(bopIsFirst);
+        }
+
+        // Tabs de plenos
+        tabsNav += this.plenos.map((pleno, index) => `
             <button
-                class="tab-btn ${index === 0 ? 'active' : ''}"
+                class="tab-btn ${!bopIsFirst && index === 0 ? 'active' : ''}"
                 data-pleno-id="${pleno.id}"
                 role="tab"
-                aria-selected="${index === 0}"
+                aria-selected="${!bopIsFirst && index === 0}"
                 aria-controls="panel-${pleno.id}"
                 id="tab-${pleno.id}"
             >
@@ -46,14 +59,24 @@ const TabsManager = {
             </button>
         `).join('');
 
-        // Generar paneles de contenido con Vista Toggle
-        this.container.innerHTML = this.plenos.map((pleno, index) => `
+        this.navContainer.innerHTML = tabsNav;
+
+        // Generar paneles de contenido (BOP primero si está habilitado)
+        let panelsHtml = '';
+
+        // Panel BOP primero
+        if (this.bopEnabled) {
+            panelsHtml += this._renderBopPanel(bopIsFirst);
+        }
+
+        // Paneles de plenos
+        panelsHtml += this.plenos.map((pleno, index) => `
             <div
-                class="tab-panel ${index === 0 ? 'active' : ''}"
+                class="tab-panel ${!bopIsFirst && index === 0 ? 'active' : ''}"
                 id="panel-${pleno.id}"
                 role="tabpanel"
                 aria-labelledby="tab-${pleno.id}"
-                ${index !== 0 ? 'hidden' : ''}
+                ${bopIsFirst || index !== 0 ? 'hidden' : ''}
             >
                 <div class="pleno-header">
                     <div class="pleno-meta">
@@ -113,12 +136,93 @@ const TabsManager = {
             </div>
         `).join('');
 
+        this.container.innerHTML = panelsHtml;
+
         // Añadir event listeners a los botones
         this.navContainer.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 this.activate(btn.dataset.plenoId);
             });
         });
+    },
+
+    // =========================================================================
+    // METODOS BOP
+    // =========================================================================
+
+    /**
+     * Renderiza el botón de navegación BOP
+     * @private
+     */
+    _renderBopTab(isActive) {
+        const bop = CONFIG.bop;
+        return `
+            <button
+                class="tab-btn ${isActive ? 'active' : ''}"
+                data-pleno-id="bop"
+                role="tab"
+                aria-selected="${isActive}"
+                aria-controls="panel-bop"
+                id="tab-bop"
+            >
+                <span class="tab-badge bop">${bop.titulo}</span>
+                <span class="tab-fecha">${bop.fechaCorta}</span>
+            </button>
+        `;
+    },
+
+    /**
+     * Renderiza el panel de contenido BOP
+     * @private
+     */
+    _renderBopPanel(isActive) {
+        const bop = CONFIG.bop;
+        return `
+            <div
+                class="tab-panel ${isActive ? 'active' : ''}"
+                id="panel-bop"
+                role="tabpanel"
+                aria-labelledby="tab-bop"
+                ${!isActive ? 'hidden' : ''}
+            >
+                <div class="pleno-header">
+                    <div class="pleno-meta">
+                        <span class="pleno-badge bop">Boletín Oficial</span>
+                        <span class="pleno-fecha">${bop.fechaFormateada}</span>
+                    </div>
+                </div>
+
+                <!-- Vista Toggle BOP: Resultado / Debate -->
+                <div class="view-toggle-container">
+                    <button class="view-toggle-btn active" data-view="bop-resultado">
+                        <span class="material-icons-round">article</span>
+                        <span class="btn-text">Resultado</span>
+                    </button>
+                    <button class="view-toggle-btn" data-view="bop-debate">
+                        <span class="material-icons-round">forum</span>
+                        <span class="btn-text">Debate</span>
+                    </button>
+                </div>
+
+                <!-- Vista BOP Resultado -->
+                <div class="tab-view tab-view-bop-resultado active">
+                    <div class="bop-dashboard-container">
+                        <div class="bop-loading">
+                            <div class="bop-loading-spinner"></div>
+                            <p>Cargando datos del BOP...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vista BOP Debate (placeholder) -->
+                <div class="tab-view tab-view-bop-debate">
+                    <div class="no-debate-data">
+                        <span class="material-icons-round">construction</span>
+                        <p>Sección de debate en desarrollo.</p>
+                    </div>
+                </div>
+            </div>
+        `;
     },
 
     /**
@@ -186,10 +290,16 @@ const TabsManager = {
             // Scroll al inicio del contenido
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            // Cargar Isso para este pleno
-            const pleno = this.plenos.find(p => p.id === plenoId);
-            if (pleno && CONFIG.isso?.enabled) {
-                IssoManager.load(plenoId, pleno.titulo);
+            // Manejar carga especifica del tab
+            if (plenoId === 'bop') {
+                // Cargar dashboard BOP si es primera vez
+                this._loadBopDashboard(tabPanel);
+            } else {
+                // Cargar Isso para plenos normales
+                const pleno = this.plenos.find(p => p.id === plenoId);
+                if (pleno && CONFIG.isso?.enabled) {
+                    IssoManager.load(plenoId, pleno.titulo);
+                }
             }
 
             this.currentTab = plenoId;
@@ -197,12 +307,40 @@ const TabsManager = {
     },
 
     /**
+     * Carga el dashboard BOP si está disponible
+     * @private
+     */
+    _loadBopDashboard(tabPanel) {
+        // Solo cargar si BopDashboard está disponible y no se ha cargado
+        if (typeof BopDashboard !== 'undefined' && !BopDashboard.isRendered()) {
+            const container = tabPanel.querySelector('.bop-dashboard-container');
+            if (container) {
+                BopDashboard.render(container);
+            }
+        }
+    },
+
+    /**
+     * Obtiene lista de todos los IDs de tabs (incluyendo BOP)
+     * @private
+     */
+    _getAllTabIds() {
+        const ids = [];
+        if (this.bopEnabled) {
+            ids.push('bop');
+        }
+        ids.push(...this.plenos.map(p => p.id));
+        return ids;
+    },
+
+    /**
      * Activa el tab siguiente
      */
     activateNext() {
-        const currentIndex = this.plenos.findIndex(p => p.id === this.currentTab);
-        if (currentIndex < this.plenos.length - 1) {
-            this.activate(this.plenos[currentIndex + 1].id);
+        const allIds = this._getAllTabIds();
+        const currentIndex = allIds.indexOf(this.currentTab);
+        if (currentIndex < allIds.length - 1) {
+            this.activate(allIds[currentIndex + 1]);
         }
     },
 
@@ -210,9 +348,10 @@ const TabsManager = {
      * Activa el tab anterior
      */
     activatePrev() {
-        const currentIndex = this.plenos.findIndex(p => p.id === this.currentTab);
+        const allIds = this._getAllTabIds();
+        const currentIndex = allIds.indexOf(this.currentTab);
         if (currentIndex > 0) {
-            this.activate(this.plenos[currentIndex - 1].id);
+            this.activate(allIds[currentIndex - 1]);
         }
     },
 
@@ -248,11 +387,13 @@ const TabsManager = {
      */
     activateFromHash() {
         const hash = window.location.hash.slice(1);
+        const allIds = this._getAllTabIds();
 
-        if (hash && this.plenos.find(p => p.id === hash)) {
+        if (hash && allIds.includes(hash)) {
             this.activate(hash);
-        } else if (this.plenos.length > 0) {
-            this.activate(this.plenos[0].id);
+        } else if (allIds.length > 0) {
+            // Activar primer tab (BOP si está habilitado)
+            this.activate(allIds[0]);
         }
     },
 
