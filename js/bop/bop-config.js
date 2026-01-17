@@ -52,9 +52,52 @@ const BOP_CONFIG = {
             label: 'Debate',
             icon: 'forum',
             active: false,
-            placeholder: true,
-            placeholderMessage: 'Seccion de debate en desarrollo.'
+            dataFile: 'ResultadosBOP/INFORME_DEBATE_BOP_2025.md'
         }
+    },
+
+    // =========================================================================
+    // CONFIGURACION DEL DEBATE (ANALISIS CRUZADO BOP-PLENOS)
+    // =========================================================================
+    debate: {
+        // Actores politicos
+        alcalde: {
+            nombre: 'Francisco Jose Farrona Navas',
+            partido: 'PSOE',
+            cargo: 'Alcalde',
+            concejales: 7
+        },
+        portavozOposicion: {
+            nombre: 'Leonor Corbacho Tejada',
+            partido: 'PP',
+            cargo: 'Portavoz',
+            concejales: 4
+        },
+        // Plenos analizados (fechas de las actas)
+        plenos: [
+            { fecha: '2024-12-26', id: '2024-12-26', tipo: 'Ordinaria' },
+            { fecha: '2025-01-13', id: '2025-01-13', tipo: 'Extraordinaria Urgente' },
+            { fecha: '2025-02-05', id: '2025-02-05', tipo: 'Extraordinaria Urgente' },
+            { fecha: '2025-04-25', id: '2025-04-25', tipo: 'Ordinaria' },
+            { fecha: '2025-05-16', id: '2025-05-16', tipo: 'Extraordinaria Urgente' },
+            { fecha: '2025-06-26', id: '2025-06-26', tipo: 'Ordinaria' },
+            { fecha: '2025-07-28', id: '2025-07-28', tipo: 'Ordinaria' },
+            { fecha: '2025-11-24', id: '2025-11-24', tipo: 'Extraordinaria Urgente' }
+        ],
+        // Criterios de trazabilidad BOP-Pleno
+        trazabilidad: {
+            margenDias: 30,
+            estados: {
+                TRAZADO: { label: 'Trazado', color: '#388E3C', icon: 'check_circle' },
+                PARCIAL: { label: 'Parcial', color: '#F57C00', icon: 'pending' },
+                SIN_SEGUIMIENTO: { label: 'Sin seguimiento', color: '#D32F2F', icon: 'cancel' },
+                NO_REQUIERE: { label: 'No requiere pleno', color: '#757575', icon: 'remove_circle_outline' }
+            }
+        },
+        // Categorias que normalmente requieren aprobacion en pleno
+        categoriasConPleno: ['Hacienda', 'Seguridad', 'Patrimonio'],
+        // Categorias que son tramite administrativo (no requieren pleno)
+        categoriasTramite: ['Empleo', 'Urbanismo', 'Administracion electronica']
     },
 
     // =========================================================================

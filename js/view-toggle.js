@@ -7,6 +7,7 @@
 const ViewToggleController = {
     _renderedTabs: new Set(),
     _bopRendered: false,
+    _bopDebateRendered: false,
 
     // Tipos de vista disponibles (incluyendo BOP)
     VIEW_TYPES: ['dashboard', 'political', 'debate', 'informe', 'bop-resultado', 'bop-debate'],
@@ -65,6 +66,8 @@ const ViewToggleController = {
             this._renderInforme(tabPanel);
         } else if (viewType === 'bop-resultado') {
             this._renderBopDashboard(tabPanel);
+        } else if (viewType === 'bop-debate') {
+            this._renderBopDebate(tabPanel);
         }
     },
 
@@ -94,6 +97,34 @@ const ViewToggleController = {
         }
 
         this._bopRendered = true;
+    },
+
+    /**
+     * Renderiza el debate BOP (analisis cruzado BOP vs Plenos)
+     * @private
+     */
+    _renderBopDebate(tabPanel) {
+        // Evitar renderizado multiple
+        if (this._bopDebateRendered) return;
+
+        // Verificar que BopDebate existe
+        if (typeof BopDebate === 'undefined') {
+            console.warn('[ViewToggle] BopDebate no disponible');
+            return;
+        }
+
+        const container = tabPanel.querySelector('.bop-debate-container');
+        if (!container) {
+            console.warn('[ViewToggle] No se encontro .bop-debate-container');
+            return;
+        }
+
+        // Solo renderizar si no se ha hecho
+        if (!BopDebate.isRendered()) {
+            BopDebate.render(container);
+        }
+
+        this._bopDebateRendered = true;
     },
 
     /**

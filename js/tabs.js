@@ -214,11 +214,13 @@ const TabsManager = {
                     </div>
                 </div>
 
-                <!-- Vista BOP Debate (placeholder) -->
+                <!-- Vista BOP Debate -->
                 <div class="tab-view tab-view-bop-debate">
-                    <div class="no-debate-data">
-                        <span class="material-icons-round">construction</span>
-                        <p>Sección de debate en desarrollo.</p>
+                    <div class="bop-debate-container">
+                        <div class="bop-loading">
+                            <div class="bop-loading-spinner"></div>
+                            <p>Cargando analisis cruzado BOP-Plenos...</p>
+                        </div>
                     </div>
                 </div>
             </div>
