@@ -114,6 +114,9 @@ const DataLoader = {
                 // Cargar informe politico (si existe)
                 await this._loadPoliticalContent(pleno);
 
+                // Cargar informe de debate/preguntas (si existe)
+                await this._loadDebateContent(pleno);
+
             } catch (error) {
                 console.error(`Error cargando ${pleno.filename}:`, error);
             }
@@ -154,6 +157,38 @@ const DataLoader = {
             console.warn(`Error cargando informe politico ${pleno.politicalFilename}:`, error);
             pleno.politicalContent = null;
             pleno.politicalHtmlContent = null;
+        }
+    },
+
+    /**
+     * Carga el contenido del informe de debate/preguntas de un pleno
+     */
+    async _loadDebateContent(pleno) {
+        if (!pleno.debateFilename) {
+            pleno.debateContent = null;
+            pleno.debateHtmlContent = null;
+            return;
+        }
+
+        try {
+            const debateUrl = `${CONFIG.paths.informesDebate}${pleno.debateFilename}`;
+            const response = await fetch(debateUrl);
+
+            if (!response.ok) {
+                console.warn(`No se encontro informe de debate: ${pleno.debateFilename}`);
+                pleno.debateContent = null;
+                pleno.debateHtmlContent = null;
+                return;
+            }
+
+            const content = await response.text();
+            pleno.debateContent = content;
+            pleno.debateHtmlContent = MarkdownParser.parse(content);
+
+        } catch (error) {
+            console.warn(`Error cargando informe de debate ${pleno.debateFilename}:`, error);
+            pleno.debateContent = null;
+            pleno.debateHtmlContent = null;
         }
     },
 

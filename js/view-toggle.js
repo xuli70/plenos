@@ -1,13 +1,13 @@
 /* ===========================================
    VIEW-TOGGLE.JS - Controlador Vista Toggle
-   Alterna entre Vista Economico, Politico y Acta PDF
+   Alterna entre Vista Economico, Politico, Debate y Acta PDF
    =========================================== */
 
 const ViewToggleController = {
     _renderedTabs: new Set(),
 
     // Tipos de vista disponibles
-    VIEW_TYPES: ['dashboard', 'political', 'informe'],
+    VIEW_TYPES: ['dashboard', 'political', 'debate', 'informe'],
 
     /**
      * Inicializa el controlador de Vista Toggle
@@ -41,7 +41,7 @@ const ViewToggleController = {
     },
 
     /**
-     * Cambia entre las 3 vistas: dashboard (economico), political, informe (PDF)
+     * Cambia entre las 4 vistas: dashboard (economico), political, debate, informe (PDF)
      */
     _switchView(tabPanel, viewType) {
         // Ocultar todas las vistas

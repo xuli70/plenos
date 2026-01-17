@@ -19,6 +19,7 @@ COPY js/ /usr/share/nginx/html/js/
 COPY data/ /usr/share/nginx/html/data/
 COPY informes/ /usr/share/nginx/html/informes/
 COPY informesPROPUESTAS/ /usr/share/nginx/html/informesPROPUESTAS/
+COPY informesPREGUNTAS/ /usr/share/nginx/html/informesPREGUNTAS/
 COPY pdfActas/ /usr/share/nginx/html/pdfActas/
 
 # Copiar entrypoint script

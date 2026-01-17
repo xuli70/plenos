@@ -63,7 +63,7 @@ const TabsManager = {
                     </div>
                 </div>
 
-                <!-- Vista Toggle: Economico / Politico / Acta PDF -->
+                <!-- Vista Toggle: Economico / Politico / Debate / Acta PDF -->
                 <div class="view-toggle-container">
                     <button class="view-toggle-btn active" data-view="dashboard">
                         <span class="material-icons-round">payments</span>
@@ -72,6 +72,10 @@ const TabsManager = {
                     <button class="view-toggle-btn" data-view="political">
                         <span class="material-icons-round">how_to_vote</span>
                         <span class="btn-text">Político</span>
+                    </button>
+                    <button class="view-toggle-btn" data-view="debate">
+                        <span class="material-icons-round">forum</span>
+                        <span class="btn-text">Debate</span>
                     </button>
                     <button class="view-toggle-btn" data-view="informe">
                         <span class="material-icons-round">picture_as_pdf</span>
@@ -90,6 +94,13 @@ const TabsManager = {
                 <div class="tab-view tab-view-political">
                     <div class="pleno-content political-content">
                         ${pleno.politicalHtmlContent || '<div class="no-political-data"><span class="material-icons-round">info</span><p>No hay informe político disponible para este pleno</p></div>'}
+                    </div>
+                </div>
+
+                <!-- Vista Debate (Preguntas de Control) -->
+                <div class="tab-view tab-view-debate">
+                    <div class="pleno-content debate-content">
+                        ${pleno.debateHtmlContent || '<div class="no-debate-data"><span class="material-icons-round">info</span><p>No hay informe de debate disponible para este pleno</p></div>'}
                     </div>
                 </div>
 

@@ -21,6 +21,7 @@ const CONFIG = {
     paths: {
         informes: 'informes/',                     // Ruta a los archivos INFORME_ECO_*.md
         informesPoliticos: 'informesPROPUESTAS/',  // Ruta a los archivos INFORME_POLITICO_*.md
+        informesDebate: 'informesPREGUNTAS/',      // Ruta a los archivos INFORME_PREGUNTAS_*.md
         pdfActas: 'pdfActas/',                     // Ruta a los archivos PDF de actas originales
         data: 'data/',
         plenosIndex: 'data/plenos.json'
